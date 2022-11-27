@@ -56,15 +56,63 @@
 		6051C96229338FE9006EA4FB /* ChessClockMVP */ = {
 			isa = PBXGroup;
 			children = (
-				6051C96329338FE9006EA4FB /* AppDelegate.swift */,
-				6051C96529338FE9006EA4FB /* SceneDelegate.swift */,
-				6051C96729338FE9006EA4FB /* ViewController.swift */,
-				6051C96929338FE9006EA4FB /* Main.storyboard */,
-				6051C96C29338FEC006EA4FB /* Assets.xcassets */,
+				6051C97729339674006EA4FB /* MainModule */,
+				6051C97B293396FB006EA4FB /* SupportingFiles */,
+				6051C97C29339740006EA4FB /* Resources */,
 				6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */,
-				6051C97129338FEC006EA4FB /* Info.plist */,
+				6051C96929338FE9006EA4FB /* Main.storyboard */,
 			);
 			path = ChessClockMVP;
+			sourceTree = "<group>";
+		};
+		6051C97729339674006EA4FB /* MainModule */ = {
+			isa = PBXGroup;
+			children = (
+				6051C97A293396A6006EA4FB /* View */,
+				6051C97929339696006EA4FB /* Model */,
+				6051C97829339684006EA4FB /* Presenter */,
+			);
+			path = MainModule;
+			sourceTree = "<group>";
+		};
+		6051C97829339684006EA4FB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6051C97929339696006EA4FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6051C97A293396A6006EA4FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6051C96729338FE9006EA4FB /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6051C97B293396FB006EA4FB /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6051C96529338FE9006EA4FB /* SceneDelegate.swift */,
+				6051C96329338FE9006EA4FB /* AppDelegate.swift */,
+				6051C97129338FEC006EA4FB /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6051C97C29339740006EA4FB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6051C96C29338FEC006EA4FB /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +337,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6LNPML24U5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChessClockMVP/Info.plist;
+				INFOPLIST_FILE = ChessClockMVP/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -318,7 +366,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6LNPML24U5;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChessClockMVP/Info.plist;
+				INFOPLIST_FILE = ChessClockMVP/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
