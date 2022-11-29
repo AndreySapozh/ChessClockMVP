@@ -9,8 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var firstPlayerLabel = UILabel()
-    var secondPlayerLabel = UILabel()
+    let firstPlayerLabel = UILabel()
+    let secondPlayerLabel = UILabel()
+    let settingsButton = UIButton()
+    let pauseButton = UIButton()
+    let updateButton = UIButton()
     	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +22,13 @@ class ViewController: UIViewController {
         
         configureFirstPlayerLabel()
         configureSecondPlayerLabel()
+        configureSettingsButton()
+        configurePauseButton()
+        configureUpdateButton()
+        
     }
     
-    func configureFirstPlayerLabel() {
+    private func configureFirstPlayerLabel() {
         
         view.addSubview(firstPlayerLabel)
        
@@ -34,38 +41,7 @@ class ViewController: UIViewController {
         createFirstPlayerLabelConstraint()
     }
 
-    func createFirstPlayerLabelConstraint() {
-        NSLayoutConstraint(item: firstPlayerLabel,
-                           attribute: .leading,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .leadingMargin,
-                           multiplier: 1,
-                           constant: 0).isActive = true
-        NSLayoutConstraint(item: firstPlayerLabel,
-                           attribute: .trailingMargin,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .trailingMargin,
-                           multiplier: 1,
-                           constant: -5).isActive = true
-        NSLayoutConstraint(item: firstPlayerLabel,
-                           attribute: .top,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .top,
-                           multiplier: 1,
-                           constant: 88).isActive = true
-        NSLayoutConstraint(item: firstPlayerLabel,
-                           attribute: .height,
-                           relatedBy: .equal,
-                           toItem: nil,
-                           attribute: .notAnAttribute,
-                           multiplier: 1,
-                           constant: 250).isActive = true
-    }
-    
-    func configureSecondPlayerLabel() {
+    private func configureSecondPlayerLabel() {
         
         view.addSubview(secondPlayerLabel)
        
@@ -77,36 +53,81 @@ class ViewController: UIViewController {
  
         createSecondPlayerLabelConstraint()
     }
+    
+    private func configureSettingsButton() {
+        
+        view.addSubview(settingsButton)
+        
+        settingsButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        settingsButton.setTitle("Set", for: .normal)
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        createSettingsButtonConstraint()
+        
+    }
+    
+    private func configurePauseButton() {
+        
+        view.addSubview(pauseButton)
+        
+        pauseButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        pauseButton.setTitle("Pau", for: .normal)
+        pauseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        createPauseButtonConstraint()
+        
+    }
+    
+    private func configureUpdateButton() {
+        
+        view.addSubview(updateButton)
+        
+        updateButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        updateButton.setTitle("Upd", for: .normal)
+        updateButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        createUpdateButtonConstraint()
+    }
+   
+    private func createFirstPlayerLabelConstraint() {
+        firstPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        firstPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        firstPlayerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        firstPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
+        
 
-    func createSecondPlayerLabelConstraint() {
-        NSLayoutConstraint(item: secondPlayerLabel,
-                           attribute: .leading,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .leadingMargin,
-                           multiplier: 1,
-                           constant: 0).isActive = true
-        NSLayoutConstraint(item: secondPlayerLabel,
-                           attribute: .trailingMargin,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .trailingMargin,
-                           multiplier: 1,
-                           constant: -5).isActive = true
-        NSLayoutConstraint(item: secondPlayerLabel,
-                           attribute: .bottom,
-                           relatedBy: .equal,
-                           toItem: view,
-                           attribute: .top,
-                           multiplier: 1,
-                           constant: 808).isActive = true
-        NSLayoutConstraint(item: secondPlayerLabel,
-                           attribute: .height,
-                           relatedBy: .equal,
-                           toItem: nil,
-                           attribute: .notAnAttribute,
-                           multiplier: 1,
-                           constant: 250).isActive = true
+    }
+    
+    private func createSecondPlayerLabelConstraint() {
+        secondPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        secondPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        secondPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
+        secondPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
+        
+    }
+
+    private func createPauseButtonConstraint() {
+        pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        pauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        pauseButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        pauseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+    }
+    
+    private func createSettingsButtonConstraint() {
+        settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
+        settingsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        settingsButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func createUpdateButtonConstraint() {
+        
+        updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
+        updateButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        updateButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        updateButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
     }
     
 }
