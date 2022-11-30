@@ -7,8 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class MainViewController: UIViewController {
+	
+    var presenter: MainViewPresenterProtocol!
+    
     let firstPlayerLabel = UILabel()
     let secondPlayerLabel = UILabel()
     let settingsButton = UIButton()
@@ -25,6 +27,8 @@ class ViewController: UIViewController {
         configureSettingsButton()
         configurePauseButton()
         configureUpdateButton()
+        
+        didTapButton(pauseButton)
         
     }
     
@@ -90,31 +94,40 @@ class ViewController: UIViewController {
     }
    
     private func createFirstPlayerLabelConstraint() {
-        firstPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        firstPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        firstPlayerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
-        firstPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
         
+        firstPlayerLabel.layer.masksToBounds = true
+        firstPlayerLabel.layer.cornerRadius = 10
+        
+        firstPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        firstPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        firstPlayerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 52).isActive = true
+        firstPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 3/10).isActive = true
 
     }
     
     private func createSecondPlayerLabelConstraint() {
-        secondPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        secondPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        secondPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive = true
-        secondPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4).isActive = true
+        
+        secondPlayerLabel.layer.masksToBounds = true
+        secondPlayerLabel.layer.cornerRadius = 10
+        
+        secondPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+        secondPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        secondPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52).isActive = true
+        secondPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 3/10).isActive = true
         
     }
 
     private func createPauseButtonConstraint() {
+        pauseButton.layer.cornerRadius = 3
         pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         pauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         pauseButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         pauseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
+                
     }
     
     private func createSettingsButtonConstraint() {
+        settingsButton.layer.cornerRadius = 3
         settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
         settingsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         settingsButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -122,13 +135,26 @@ class ViewController: UIViewController {
     }
     
     func createUpdateButtonConstraint() {
-        
+        updateButton.layer.cornerRadius = 3
         updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
         updateButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         updateButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         updateButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
     }
+    
+    func didTapButton(_ button: Any) {
+        self.presenter?.setTime()
+    }
+    
+}
+
+extension MainViewController: MainViewProtocol {
+    func setTime(time: String) {
+        self.firstPlayerLabel.text = time
+    }
+    
+    
     
 }
 
