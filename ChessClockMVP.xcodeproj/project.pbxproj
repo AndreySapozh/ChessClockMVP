@@ -10,7 +10,6 @@
 		6051C96429338FE9006EA4FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96329338FE9006EA4FB /* AppDelegate.swift */; };
 		6051C96629338FE9006EA4FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96529338FE9006EA4FB /* SceneDelegate.swift */; };
 		6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96729338FE9006EA4FB /* MainViewController.swift */; };
-		6051C96B29338FE9006EA4FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96929338FE9006EA4FB /* Main.storyboard */; };
 		6051C96D29338FEC006EA4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96C29338FEC006EA4FB /* Assets.xcassets */; };
 		6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */; };
 		6051C97E2937500F006EA4FB /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* Time.swift */; };
@@ -22,7 +21,6 @@
 		6051C96329338FE9006EA4FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6051C96529338FE9006EA4FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6051C96729338FE9006EA4FB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		6051C96A29338FE9006EA4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6051C96C29338FEC006EA4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6051C96F29338FEC006EA4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6051C97129338FEC006EA4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 				6051C97B293396FB006EA4FB /* SupportingFiles */,
 				6051C97C29339740006EA4FB /* Resources */,
 				6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */,
-				6051C96929338FE9006EA4FB /* Main.storyboard */,
 			);
 			path = ChessClockMVP;
 			sourceTree = "<group>";
@@ -181,7 +178,6 @@
 			files = (
 				6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */,
 				6051C96D29338FEC006EA4FB /* Assets.xcassets in Resources */,
-				6051C96B29338FE9006EA4FB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,14 +199,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6051C96929338FE9006EA4FB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6051C96A29338FE9006EA4FB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
