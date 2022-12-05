@@ -27,10 +27,20 @@ class MainViewController: UIViewController {
         configureSettingsButton()
         configurePauseButton()
         configureUpdateButton()
-        
-        didTapButton(pauseButton)
+      
+        settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
+    }
+    
+    @objc private func didTapSettingsButton() {
+        let rootVC = SettingsViewController()
+//        rootVC.delegate = self
+        let navVC = UINavigationController(rootViewController: rootVC)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
         
     }
+    
+    
     
     private func configureFirstPlayerLabel() {
         
@@ -143,9 +153,9 @@ class MainViewController: UIViewController {
         
     }
     
-    func didTapButton(_ button: Any) {
-        self.presenter?.setTime()
-    }
+//    func didTapButton(_ button: Any) {
+//        self.presenter?.setTime()
+//    }
     
 }
 

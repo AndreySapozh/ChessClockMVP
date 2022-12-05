@@ -14,6 +14,12 @@
 		6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */; };
 		6051C97E2937500F006EA4FB /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* Time.swift */; };
 		6051C98029378BC1006EA4FB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97F29378BC1006EA4FB /* MainPresenter.swift */; };
+		6051C98529388E79006EA4FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98429388E79006EA4FB /* SettingsViewController.swift */; };
+		6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98629388F5B006EA4FB /* SettingsPresenter.swift */; };
+		6051C9892938A225006EA4FB /* RouterMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C9882938A225006EA4FB /* RouterMain.swift */; };
+		6051C98B2938A424006EA4FB /* AssemblyModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */; };
+		6051C990293C7059006EA4FB /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98F293C7059006EA4FB /* SettingsModel.swift */; };
+		6051C992293C70B7006EA4FB /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C991293C70B7006EA4FB /* TimeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,12 @@
 		6051C97129338FEC006EA4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6051C97D2937500F006EA4FB /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		6051C97F29378BC1006EA4FB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		6051C98429388E79006EA4FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6051C98629388F5B006EA4FB /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		6051C9882938A225006EA4FB /* RouterMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMain.swift; sourceTree = "<group>"; };
+		6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModelBuilder.swift; sourceTree = "<group>"; };
+		6051C98F293C7059006EA4FB /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		6051C991293C70B7006EA4FB /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,9 @@
 		6051C96229338FE9006EA4FB /* ChessClockMVP */ = {
 			isa = PBXGroup;
 			children = (
+				6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */,
+				6051C9882938A225006EA4FB /* RouterMain.swift */,
+				6051C9812938827F006EA4FB /* SettingsModule */,
 				6051C97729339674006EA4FB /* MainModule */,
 				6051C97B293396FB006EA4FB /* SupportingFiles */,
 				6051C97C29339740006EA4FB /* Resources */,
@@ -116,6 +131,41 @@
 				6051C96C29338FEC006EA4FB /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6051C9812938827F006EA4FB /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				6051C98E293C7036006EA4FB /* Model */,
+				6051C9832938832B006EA4FB /* View */,
+				6051C9822938829B006EA4FB /* Presenter */,
+			);
+			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		6051C9822938829B006EA4FB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6051C98629388F5B006EA4FB /* SettingsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6051C9832938832B006EA4FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6051C98429388E79006EA4FB /* SettingsViewController.swift */,
+				6051C991293C70B7006EA4FB /* TimeTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6051C98E293C7036006EA4FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6051C98F293C7059006EA4FB /* SettingsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,10 +239,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6051C98029378BC1006EA4FB /* MainPresenter.swift in Sources */,
+				6051C9892938A225006EA4FB /* RouterMain.swift in Sources */,
+				6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */,
 				6051C97E2937500F006EA4FB /* Time.swift in Sources */,
+				6051C992293C70B7006EA4FB /* TimeTableViewCell.swift in Sources */,
 				6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */,
 				6051C96429338FE9006EA4FB /* AppDelegate.swift in Sources */,
+				6051C990293C7059006EA4FB /* SettingsModel.swift in Sources */,
+				6051C98B2938A424006EA4FB /* AssemblyModelBuilder.swift in Sources */,
 				6051C96629338FE9006EA4FB /* SceneDelegate.swift in Sources */,
+				6051C98529388E79006EA4FB /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
