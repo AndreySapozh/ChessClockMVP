@@ -13,12 +13,11 @@ protocol MainViewProtocol: AnyObject {
 protocol MainViewPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, time: Time, router: RouterProtocol)
     
-    func setTime()
-    func tapSettingsButton(time: Time)
+    func setTime(time: Time)
+    func tapSettingsButton()
 }
 
 class MainPresenter: MainViewPresenterProtocol {
-    
     weak var view: MainViewProtocol?
     let time: Time
     var router: RouterProtocol?
@@ -30,11 +29,11 @@ class MainPresenter: MainViewPresenterProtocol {
         self.time = time
         self.router = router
     }
-    func tapSettingsButton(time: Time) {
-        router?.showSettings(time: time)
+    func tapSettingsButton() {
+        router?.showSettings()
     }
     
-    func setTime() {
+func setTime(time: Time) {
         let time = String(self.time.seconds!) + String(self.time.minutes!)
         self.view?.setTime(time: time)
     }

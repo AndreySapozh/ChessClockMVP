@@ -10,7 +10,9 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     var presenter: SettingsViewPresenterProtocol!
+    let startButton = UIButton()
     var tableView = UITableView()
+    let heightCell: CGFloat = 50
     
     var objects: [TimeChess] = [TimeChess(timeChess: "Bullet"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
     
@@ -20,8 +22,16 @@ class SettingsViewController: UIViewController {
 
 
     override func viewDidLoad() {
+        view.backgroundColor = .white
         configureTableView()
+        configureStartButton()
+        startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
+
 //        presenter.setTime()
+    }
+    
+    @objc private func didTapStartButton() {
+        presenter.tapStartButton()
     }
     
     func configureTableView() {
@@ -29,7 +39,7 @@ class SettingsViewController: UIViewController {
 //        set delegates
         setTableViewDelegates()
 //        set row height
-        tableView.rowHeight = 50
+        tableView.rowHeight = heightCell
 //        register cells
         tableView.register(TimeTableViewCell.self, forCellReuseIdentifier: Cells.textCell)
 //        set constraints
@@ -37,9 +47,28 @@ class SettingsViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(2 * heightCell)).isActive = true
     }
     
+    func configureStartButton() {
+        view.addSubview(startButton)
+        
+        startButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        startButton.setTitle("START", for: .normal)
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        createStartButtonConstraint()
+    }
+    
+    func createStartButtonConstraint() {
+        startButton.layer.cornerRadius = 3
+        
+        startButton.heightAnchor.constraint(equalToConstant: heightCell).isActive = true
+        startButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        startButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -heightCell).isActive = true
+        
+    }
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,8 +94,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension SettingsViewController: SettingsViewProtocol {
-    func setTime(time: Time?) {
-        print(time!)
+    func setTimeChess(timeChess: TimeChess ) {
+        print(timeChess)
     }
     
 

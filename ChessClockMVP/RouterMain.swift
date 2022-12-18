@@ -14,12 +14,13 @@ protocol RouterMain {
 
 protocol RouterProtocol: RouterMain {
     func initialViewController()
-    func showSettings(time: Time)
+//    func showSettings(time: Time)
+    func showSettings()
     func popToRoot()
 }
 
 class Router: RouterProtocol {
-   
+    
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
     
@@ -27,6 +28,7 @@ class Router: RouterProtocol {
         self.navigationController = navigationController
         self.assemblyBuilder = assemblyBuilder
     }
+   
     
     func initialViewController() {
         if let navigationController = navigationController {
@@ -34,13 +36,20 @@ class Router: RouterProtocol {
             navigationController.viewControllers = [mainViewController]
         }
     }
-
-    func showSettings(time: Time) {
+    
+    func showSettings() {
         if let navigationController = navigationController {
-            guard let settingsViewController = assemblyBuilder?.createSettingsModule(time: time, router: self) else { return }
+            guard let settingsViewController = assemblyBuilder?.createSettingsModule(router: self) else { return }
             navigationController.pushViewController(settingsViewController, animated: true)
         }
+        
     }
+//    func showSettings(time: Time) {
+//        if let navigationController = navigationController {
+//            guard let settingsViewController = assemblyBuilder?.createSettingsModule(time: time, router: self) else { return }
+//            navigationController.pushViewController(settingsViewController, animated: true)
+//        }
+//    }
     
     func popToRoot() {
         if let navigationController = navigationController {
@@ -48,5 +57,4 @@ class Router: RouterProtocol {
         }
     }
 }
-
 

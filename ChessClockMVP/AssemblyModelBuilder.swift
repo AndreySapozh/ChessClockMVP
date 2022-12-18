@@ -9,7 +9,8 @@ import UIKit
 
 protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
-    func createSettingsModule(time: Time,router: RouterProtocol) -> UIViewController
+//    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController
+    func createSettingsModule(router: RouterProtocol) -> UIViewController
 }
 
 class AssemblyModelBuilder: AssemblyBuilderProtocol {
@@ -23,16 +24,21 @@ class AssemblyModelBuilder: AssemblyBuilderProtocol {
         view.presenter = presenter
         return view
     }
-    
-    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController {
+
+    func createSettingsModule(router: RouterProtocol) -> UIViewController {
         let view = SettingsViewController()
-        let time = Time()
-//        let networkService = NetworkService()\
-        let presenter = SettingsPresenter(view: view, router: router, time: time)
-//        let presenter = DetailPresenter(view: view, networkService: networkService, router: router, comment: comment)
+        let timeChess = TimeChess(timeChess: "first")
+        let presenter = SettingsPresenter(view: view, router: router, timeChess: timeChess)
         view.presenter = presenter
         return view
     }
+//    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController {
+//        let view = SettingsViewController()
+//        let timeChess = TimeChess(timeChess: "first")
+//        let presenter = SettingsPresenter(view: view, router: router, timeChess: timeChess)
+//        view.presenter = presenter
+//        return view
+//    }
 
     
 }

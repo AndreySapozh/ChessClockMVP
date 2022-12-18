@@ -8,33 +8,35 @@
 import Foundation
 	
 protocol SettingsViewProtocol: AnyObject {
-    func setTime(time: Time?)
+    func setTimeChess(timeChess: TimeChess)
 }
 
 protocol SettingsViewPresenterProtocol: AnyObject {
-    init(view: SettingsViewProtocol, router: RouterProtocol, time: Time?)
+    init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeChess)
     func setTime()
-    func tap()
+    func tapStartButton()
 }
 
 class SettingsPresenter: SettingsViewPresenterProtocol {
+    
     weak var view: SettingsViewProtocol?
 //    var networkService: NetworkService!
     var router: RouterProtocol?
-    var time: Time?
+    var timeChess: TimeChess
     
-    required init(view: SettingsViewProtocol, router: RouterProtocol, time: Time?) {
+    required init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeChess) {
         self.view = view
 //        self.networkService = networkService
-        self.time = time
+        self.timeChess = timeChess
         self.router = router
     }
     
-    func setTime() {
-        self.view?.setTime(time: time)
+    public func setTime() {
+        self.view?.setTimeChess(timeChess: timeChess)
     }
-    func tap() {
+    func tapStartButton() {
         router?.popToRoot()
+//        router?.dismiss()
     }
     
     
