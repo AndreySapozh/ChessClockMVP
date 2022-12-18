@@ -12,6 +12,7 @@ class SettingsViewController: UIViewController {
     var presenter: SettingsViewPresenterProtocol!
     let startButton = UIButton()
     var tableView = UITableView()
+    
     let heightCell: CGFloat = 50
     
     var objects: [TimeChess] = [TimeChess(timeChess: "Bullet"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
@@ -33,6 +34,7 @@ class SettingsViewController: UIViewController {
     @objc private func didTapStartButton() {
         presenter.tapStartButton()
     }
+    
     
     func configureTableView() {
         view.addSubview(tableView)

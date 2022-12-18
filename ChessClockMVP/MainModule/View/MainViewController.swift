@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     let secondPlayerLabel = UILabel()
     let settingsButton = UIButton()
     let pauseButton = UIButton()
-    let updateButton = UIButton()
+    let resetButton = UIButton()
     
     let heightWidthButton: CGFloat = 40
     private let topBottomConstrait: CGFloat = 0
@@ -34,10 +34,23 @@ class MainViewController: UIViewController {
         configureUpdateButton()
       
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
     }
     
     @objc private func didTapSettingsButton() {
         presenter.tapSettingsButton()
+    }
+    
+    @objc private func didTapResetButton() {
+        let alert = UIAlertController(title: nil, message: "Reset the clock?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (_) in
+            // do nothing
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     private func configureFirstPlayerLabel() {
@@ -92,11 +105,11 @@ class MainViewController: UIViewController {
     
     private func configureUpdateButton() {
         
-        view.addSubview(updateButton)
+        view.addSubview(resetButton)
         
-        updateButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
-        updateButton.setTitle("Res", for: .normal)
-        updateButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        resetButton.setTitle("Res", for: .normal)
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
         
         createUpdateButtonConstraint()
     }
@@ -143,11 +156,11 @@ class MainViewController: UIViewController {
     }
     
     func createUpdateButtonConstraint() {
-        updateButton.layer.cornerRadius = 3
-        updateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
-        updateButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        updateButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        updateButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+        resetButton.layer.cornerRadius = 3
+        resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
+        resetButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        resetButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+        resetButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
         
     }
      
