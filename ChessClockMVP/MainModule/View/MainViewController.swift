@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
         }))
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+//            update chess time
         }))
         self.present(alert, animated: true, completion: nil)
         
@@ -161,7 +162,6 @@ class MainViewController: UIViewController {
         resetButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         resetButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
         resetButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        
     }
      
 }
@@ -170,8 +170,6 @@ extension MainViewController: MainViewProtocol {
     func setTime(time: String) {
         self.firstPlayerLabel.text = time
     }
-    
-    
     
 }
 

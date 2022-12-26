@@ -44,12 +44,6 @@ class Router: RouterProtocol {
         }
         
     }
-//    func showSettings(time: Time) {
-//        if let navigationController = navigationController {
-//            guard let settingsViewController = assemblyBuilder?.createSettingsModule(time: time, router: self) else { return }
-//            navigationController.pushViewController(settingsViewController, animated: true)
-//        }
-//    }
     
     func popToRoot() {
         if let navigationController = navigationController {
