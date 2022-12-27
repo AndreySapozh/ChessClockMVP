@@ -17,6 +17,7 @@ protocol RouterProtocol: RouterMain {
 //    func showSettings(time: Time)
     func showSettings()
     func popToRoot()
+    func showCreateNewTime()
 }
 
 class Router: RouterProtocol {
@@ -43,6 +44,14 @@ class Router: RouterProtocol {
             navigationController.pushViewController(settingsViewController, animated: true)
         }
         
+    }
+    
+    func showCreateNewTime() {
+        if let navigationController = navigationController {
+            guard let newTimeViewController = assemblyBuilder?.createNewTimeModule(router: self) else { return }
+            navigationController.pushViewController(newTimeViewController, animated: true)
+            
+        }
     }
     
     func popToRoot() {

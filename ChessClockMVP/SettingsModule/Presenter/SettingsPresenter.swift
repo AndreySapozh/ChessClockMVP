@@ -15,6 +15,7 @@ protocol SettingsViewPresenterProtocol: AnyObject {
     init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeChess)
     func setTime()
     func tapStartButton()
+    func tapCreateNewTime()
 }
 
 class SettingsPresenter: SettingsViewPresenterProtocol {
@@ -35,11 +36,15 @@ class SettingsPresenter: SettingsViewPresenterProtocol {
         self.view?.setTimeChess(timeChess: timeChess)
     }
     func tapStartButton() {
-        router?.popToRoot()
-//        router?.dismiss()
+//        router?.popToRoot()
+        router?.showCreateNewTime()
+
     }
     
-    
+    func tapCreateNewTime() {
+        router?.showCreateNewTime()
+    }
+
 }
 
 

@@ -28,7 +28,6 @@ class SettingsViewController: UIViewController {
         configureStartButton()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
 
-//        presenter.setTime()
     }
     
     @objc private func didTapStartButton() {
@@ -91,6 +90,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.set(object: object)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.tapCreateNewTime()
+    }
+    
+
 
 }
 

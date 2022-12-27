@@ -11,6 +11,7 @@ protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
 //    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController
     func createSettingsModule(router: RouterProtocol) -> UIViewController
+    func createNewTimeModule(router: RouterProtocol) -> UIViewController
 }
 
 class AssemblyModelBuilder: AssemblyBuilderProtocol {
@@ -32,13 +33,13 @@ class AssemblyModelBuilder: AssemblyBuilderProtocol {
         view.presenter = presenter
         return view
     }
-//    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController {
-//        let view = SettingsViewController()
-//        let timeChess = TimeChess(timeChess: "first")
-//        let presenter = SettingsPresenter(view: view, router: router, timeChess: timeChess)
-//        view.presenter = presenter
-//        return view
-//    }
+    func createNewTimeModule(router: RouterProtocol) -> UIViewController {
+        let view = NewTimeViewController()
+        let newTime = NewTime(newTimeSeconds: 60)
+        let presenter = NewTimePresenter(view: view, newTimeChess: newTime, router: router)
+        view.presenter = presenter
+        return view
+    }
 
     
 }
