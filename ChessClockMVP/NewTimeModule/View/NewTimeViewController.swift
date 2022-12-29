@@ -10,12 +10,14 @@ import UIKit
 class NewTimeViewController: UIViewController {
     
     var presenter: NewTimeViewPresenterProtocol!
-   
+    var datePicker = UIDatePicker()
     
     override func viewDidLoad() {
-
-        view.backgroundColor = .red
         
+        view.backgroundColor = .white
+        datePicker.center = view.center
+        datePicker.datePickerMode = .countDownTimer
+        self.view.addSubview(datePicker)
     }
 }
 

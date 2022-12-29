@@ -92,13 +92,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.tapCreateNewTime()
+        if indexPath.row == 0 {
+            presenter.tapCreateNewTime()
+        }
+        
+        else { return }
     }
-    
-
 
 }
-
 
 extension SettingsViewController: SettingsViewProtocol {
     func setTimeChess(timeChess: TimeChess ) {
