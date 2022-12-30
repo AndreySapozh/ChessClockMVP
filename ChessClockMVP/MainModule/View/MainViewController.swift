@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     let resetButton = UIButton()
     
     let heightWidthButton: CGFloat = 40
+    let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
     
     var timer = Timer()
@@ -27,11 +28,11 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = UIColor(red: 241/255, green: 238/255, blue: 228/255, alpha: 1)
         
-        configureFirstPlayerLabel()
-        configureSecondPlayerLabel()
-        configureSettingsButton()
-        configurePauseButton()
-        configureUpdateButton()
+        configureButton(button: settingsButton)
+        configureButton(button: pauseButton)
+        configureButton(button: resetButton)
+        configurePlayerLabel(playerLabel: firstPlayerLabel)
+        configurePlayerLabel(playerLabel: secondPlayerLabel)
       
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
@@ -54,116 +55,72 @@ class MainViewController: UIViewController {
         
     }
     
-    private func configureFirstPlayerLabel() {
+   
+    private func configurePlayerLabel(playerLabel: UILabel) {
         
-        view.addSubview(firstPlayerLabel)
+        view.addSubview(playerLabel)
        
-        firstPlayerLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
-        firstPlayerLabel.text = "00:00"
-        firstPlayerLabel.textAlignment = .center
-        firstPlayerLabel.font = UIFont.systemFont(ofSize: 80)
-        firstPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
+        playerLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
+        playerLabel.text = "00:00"
+        playerLabel.textAlignment = .center
+        playerLabel.font = UIFont.systemFont(ofSize: 80)
+        playerLabel.translatesAutoresizingMaskIntoConstraints = false
  
-        createFirstPlayerLabelConstraint()
+        createFirstPlayerLabelConstraint(playerLabel: playerLabel)
     }
+    
+    private func configureButton(button: UIButton) {
+        
+        view.addSubview(button)
+        button.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch button {
+        case settingsButton:
+            button.setTitle("Set", for: .normal)
+        case pauseButton:
+            pauseButton.setTitle("Pau", for: .normal)
+        case resetButton:
+            resetButton.setTitle("Res", for: .normal)
+        default:
+            return
+        }
 
-    private func configureSecondPlayerLabel() {
-        
-        view.addSubview(secondPlayerLabel)
-       
-        secondPlayerLabel.backgroundColor = UIColor(red: 50/255, green: 240/255, blue: 120/255, alpha: 1)
-        secondPlayerLabel.text = "00:00"
-        secondPlayerLabel.textAlignment = .center
-        secondPlayerLabel.font = UIFont.systemFont(ofSize: 80)
-        secondPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
- 
-        createSecondPlayerLabelConstraint()
-    }
-    
-    private func configureSettingsButton() {
-        
-        view.addSubview(settingsButton)
-        
-        settingsButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
-        settingsButton.setTitle("Set", for: .normal)
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        createSettingsButtonConstraint()
-        
-    }
-    
-    private func configurePauseButton() {
-        
-        view.addSubview(pauseButton)
-        
-        pauseButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
-        pauseButton.setTitle("Pau", for: .normal)
-        pauseButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        createPauseButtonConstraint()
-        
-    }
-    
-    private func configureUpdateButton() {
-        
-        view.addSubview(resetButton)
-        
-        resetButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
-        resetButton.setTitle("Res", for: .normal)
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        createUpdateButtonConstraint()
+        createButtonConstraint(button: button)
     }
    
-    private func createFirstPlayerLabelConstraint() {
+    private func createFirstPlayerLabelConstraint(playerLabel: UILabel) {
         
-        firstPlayerLabel.layer.masksToBounds = true
-        firstPlayerLabel.layer.cornerRadius = 10
-        
-        firstPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        firstPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        firstPlayerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
-        firstPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/10).isActive = true
+        playerLabel.layer.masksToBounds = true
+        playerLabel.layer.cornerRadius = 10
+        playerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        playerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
 
-    }
-    
-    private func createSecondPlayerLabelConstraint() {
-        
-        secondPlayerLabel.layer.masksToBounds = true
-        secondPlayerLabel.layer.cornerRadius = 10
-        
-        secondPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        secondPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        secondPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -topBottomConstrait).isActive = true
-        secondPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/10).isActive = true
+        if playerLabel == firstPlayerLabel {
+            playerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
+        } else {
+            playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -topBottomConstrait).isActive = true
+        }
+        playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/10).isActive = true
         
     }
-
-    private func createPauseButtonConstraint() {
-        pauseButton.layer.cornerRadius = 3
-        pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        pauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        pauseButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        pauseButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-                
-    }
     
-    private func createSettingsButtonConstraint() {
-        settingsButton.layer.cornerRadius = 3
-        settingsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80).isActive = true
-        settingsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        settingsButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        settingsButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+    func createButtonConstraint(button: UIButton) {
+        button.layer.cornerRadius = 3
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        button.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+        button.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+        switch button {
+        case settingsButton:
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -buttonCenterXConstrait).isActive = true
+        case pauseButton:
+            pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        case resetButton:
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonCenterXConstrait).isActive = true
+        default:
+            return
+        }
     }
-    
-    func createUpdateButtonConstraint() {
-        resetButton.layer.cornerRadius = 3
-        resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80).isActive = true
-        resetButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        resetButton.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        resetButton.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-    }
-     
 }
 
 extension MainViewController: MainViewProtocol {
