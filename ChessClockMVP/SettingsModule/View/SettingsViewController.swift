@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController {
     
     let heightCell: CGFloat = 50
     
-    var objects: [TimeChess] = [TimeChess(timeChess: "Create new time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
+    var objects: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
     
     struct Cells {
         static let textCell = "textCell"
