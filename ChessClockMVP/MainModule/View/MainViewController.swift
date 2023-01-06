@@ -19,8 +19,8 @@ class MainViewController: UIViewController {
     let movesCounterFirstPlayer = UILabel()
     let movesCounterSecondPlayer = UILabel()
 
-    var moveNumberFirstPlayer: Int = 0
-    var moveNumberSecondPlayer: Int = 0
+    var moveNumberFirstPlayer: Int = 1
+    var moveNumberSecondPlayer: Int = 2
     let heightWidthButton: CGFloat = 40
     let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
@@ -67,7 +67,7 @@ class MainViewController: UIViewController {
         view.addSubview(playerLabel)
        
         playerLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
-        playerLabel.text = "00:00"
+        playerLabel.text = "01:00"
         playerLabel.textAlignment = .center
         playerLabel.font = UIFont.systemFont(ofSize: 80)
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -113,8 +113,9 @@ class MainViewController: UIViewController {
 
         if playerLabel == firstPlayerLabel {
             playerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
+            playerLabel.transform = CGAffineTransformMakeRotation(3.14)
         } else {
-            playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -topBottomConstrait).isActive = true
+            playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait).isActive = true
         }
         playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
         
@@ -147,12 +148,15 @@ class MainViewController: UIViewController {
         moveLabel.translatesAutoresizingMaskIntoConstraints = false
         moveLabel.heightAnchor.constraint(equalToConstant: heightWidthButton * 0.75).isActive = true
         moveLabel.widthAnchor.constraint(equalToConstant: heightWidthButton * 2).isActive = true
-        moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
         switch playerLabel {
         case firstPlayerLabel:
-            moveLabel.bottomAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: -heightWidthButton * 0.5).isActive = true
+            moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5).isActive = true
+            moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
+
         case secondPlayerLabel:
             moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5).isActive = true
+            moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
+
         default:
             return
         }
