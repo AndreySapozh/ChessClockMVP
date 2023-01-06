@@ -16,12 +16,16 @@ class MainViewController: UIViewController {
     let settingsButton = UIButton()
     let pauseButton = UIButton()
     let resetButton = UIButton()
-    
+    let movesCounterFirstPlayer = UILabel()
+    let movesCounterSecondPlayer = UILabel()
+
+    var moveNumberFirstPlayer: Int = 0
+    var moveNumberSecondPlayer: Int = 0
     let heightWidthButton: CGFloat = 40
     let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
     
-    var timer = Timer()
+//    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,8 @@ class MainViewController: UIViewController {
         configureButton(button: resetButton)
         configurePlayerLabel(playerLabel: firstPlayerLabel)
         configurePlayerLabel(playerLabel: secondPlayerLabel)
+        configureMovesCounter(moveLabel: movesCounterFirstPlayer, playerLabel: firstPlayerLabel, moveNumber: moveNumberFirstPlayer)
+        configureMovesCounter(moveLabel: movesCounterSecondPlayer, playerLabel: secondPlayerLabel, moveNumber: moveNumberSecondPlayer)
       
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
@@ -66,7 +72,16 @@ class MainViewController: UIViewController {
         playerLabel.font = UIFont.systemFont(ofSize: 80)
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
  
-        createFirstPlayerLabelConstraint(playerLabel: playerLabel)
+        createPlayerLabelConstraint(playerLabel: playerLabel)
+    }
+    
+    private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel, moveNumber: Int) {
+        moveLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
+        moveLabel.text = " Moves: \(moveNumber)"
+        moveLabel.font = UIFont.systemFont(ofSize: 15)
+
+        movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
+
     }
     
     private func configureButton(button: UIButton) {
@@ -89,7 +104,7 @@ class MainViewController: UIViewController {
         createButtonConstraint(button: button)
     }
    
-    private func createFirstPlayerLabelConstraint(playerLabel: UILabel) {
+    private func createPlayerLabelConstraint(playerLabel: UILabel) {
         
         playerLabel.layer.masksToBounds = true
         playerLabel.layer.cornerRadius = 10
@@ -101,7 +116,7 @@ class MainViewController: UIViewController {
         } else {
             playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -topBottomConstrait).isActive = true
         }
-        playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/10).isActive = true
+        playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
         
     }
     
@@ -121,6 +136,29 @@ class MainViewController: UIViewController {
             return
         }
     }
+    
+    private func movesCounterConstraint(moveLabel: UILabel, playerLabel: UILabel) {
+       
+        
+        playerLabel.addSubview(moveLabel)
+        moveLabel.layer.masksToBounds = true
+        moveLabel.layer.cornerRadius = 8
+        
+        moveLabel.translatesAutoresizingMaskIntoConstraints = false
+        moveLabel.heightAnchor.constraint(equalToConstant: heightWidthButton * 0.75).isActive = true
+        moveLabel.widthAnchor.constraint(equalToConstant: heightWidthButton * 2).isActive = true
+        moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
+        switch playerLabel {
+        case firstPlayerLabel:
+            moveLabel.bottomAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: -heightWidthButton * 0.5).isActive = true
+        case secondPlayerLabel:
+            moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5).isActive = true
+        default:
+            return
+        }
+
+    }
+    
 }
 
 extension MainViewController: MainViewProtocol {
