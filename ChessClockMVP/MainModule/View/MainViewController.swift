@@ -19,14 +19,13 @@ class MainViewController: UIViewController {
     let movesCounterFirstPlayer = UILabel()
     let movesCounterSecondPlayer = UILabel()
 
-    var moveNumberFirstPlayer: Int = 1
-    var moveNumberSecondPlayer: Int = 2
+    var moveNumberFirstPlayer: Int = 0
+    var moveNumberSecondPlayer: Int = 0
     let heightWidthButton: CGFloat = 40
     let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
     
-//    var timer = Timer()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

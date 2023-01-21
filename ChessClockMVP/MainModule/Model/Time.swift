@@ -12,5 +12,3 @@ struct Time {
     var minutes: Int?
     var hours: Int?
 }
-
-

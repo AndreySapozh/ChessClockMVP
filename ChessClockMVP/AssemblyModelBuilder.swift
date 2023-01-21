@@ -9,7 +9,6 @@ import UIKit
 
 protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
-//    func createSettingsModule(time: Time, router: RouterProtocol) -> UIViewController
     func createSettingsModule(router: RouterProtocol) -> UIViewController
     func createNewTimeModule(router: RouterProtocol) -> UIViewController
 }
@@ -18,10 +17,8 @@ class AssemblyModelBuilder: AssemblyBuilderProtocol {
     
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-//        let networkService = NetworkService()
         let time = Time()
         let presenter = MainPresenter(view: view, time: time, router: router)
-//        let presenter = MainPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         return view
     }

@@ -14,7 +14,6 @@ protocol RouterMain {
 
 protocol RouterProtocol: RouterMain {
     func initialViewController()
-//    func showSettings(time: Time)
     func showSettings()
     func popToRoot()
     func showCreateNewTime()
