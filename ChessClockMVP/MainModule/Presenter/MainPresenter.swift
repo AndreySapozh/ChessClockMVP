@@ -17,7 +17,7 @@ protocol MainViewPresenterProtocol: AnyObject {
     func tapSettingsButton()
 }
 
-class MainPresenter: MainViewPresenterProtocol {
+final class MainPresenter: MainViewPresenterProtocol {
     weak var view: MainViewProtocol?
     let time: Time
     var router: RouterProtocol?

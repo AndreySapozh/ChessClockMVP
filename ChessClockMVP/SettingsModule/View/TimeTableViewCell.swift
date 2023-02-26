@@ -8,7 +8,7 @@
 import UIKit
 
 
-class TimeTableViewCell: UITableViewCell {
+final class TimeTableViewCell: UITableViewCell {
 
     var timeTitleLabel = UILabel()
     
@@ -34,10 +34,12 @@ class TimeTableViewCell: UITableViewCell {
     
     func setTimeTitleLabelConstraints() {
         timeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        timeTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+                timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                timeTitleLabel.heightAnchor.constraint(equalToConstant: 80),
+                timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+                                    ])
     }
     
 }

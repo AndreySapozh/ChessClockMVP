@@ -19,7 +19,7 @@ protocol RouterProtocol: RouterMain {
     func showCreateNewTime()
 }
 
-class Router: RouterProtocol {
+final class Router: RouterProtocol {
     
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?

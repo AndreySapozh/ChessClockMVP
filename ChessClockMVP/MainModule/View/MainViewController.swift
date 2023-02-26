@@ -11,18 +11,18 @@ class MainViewController: UIViewController {
 	
     var presenter: MainViewPresenterProtocol!
     
-    let firstPlayerLabel = UILabel()
-    let secondPlayerLabel = UILabel()
-    let settingsButton = UIButton()
-    let pauseButton = UIButton()
-    let resetButton = UIButton()
-    let movesCounterFirstPlayer = UILabel()
-    let movesCounterSecondPlayer = UILabel()
+    private let firstPlayerLabel = UILabel()
+    private let secondPlayerLabel = UILabel()
+    private let settingsButton = UIButton()
+    private let pauseButton = UIButton()
+    private let resetButton = UIButton()
+    private let movesCounterFirstPlayer = UILabel()
+    private let movesCounterSecondPlayer = UILabel()
 
     var moveNumberFirstPlayer: Int = 0
     var moveNumberSecondPlayer: Int = 0
-    let heightWidthButton: CGFloat = 40
-    let buttonCenterXConstrait: CGFloat = 80
+    private let heightWidthButton: CGFloat = 40
+    private let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
     
 
@@ -107,24 +107,26 @@ class MainViewController: UIViewController {
         
         playerLabel.layer.masksToBounds = true
         playerLabel.layer.cornerRadius = 10
-        playerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        playerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-
+        NSLayoutConstraint.activate([
+            playerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            playerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
+                                        ])
         if playerLabel == firstPlayerLabel {
             playerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
             playerLabel.transform = CGAffineTransformMakeRotation(3.14)
         } else {
             playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait).isActive = true
         }
-        playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
-        
     }
     
-    func createButtonConstraint(button: UIButton) {
+    private func createButtonConstraint(button: UIButton) {
         button.layer.cornerRadius = 3
-        button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
-        button.widthAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
-        button.heightAnchor.constraint(equalToConstant: heightWidthButton).isActive = true
+        NSLayoutConstraint.activate([
+                button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+                button.widthAnchor.constraint(equalToConstant: heightWidthButton),
+                button.heightAnchor.constraint(equalToConstant: heightWidthButton)
+                                    ])
         switch button {
         case settingsButton:
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -buttonCenterXConstrait).isActive = true
@@ -145,17 +147,22 @@ class MainViewController: UIViewController {
         moveLabel.layer.cornerRadius = 8
         
         moveLabel.translatesAutoresizingMaskIntoConstraints = false
-        moveLabel.heightAnchor.constraint(equalToConstant: heightWidthButton * 0.75).isActive = true
-        moveLabel.widthAnchor.constraint(equalToConstant: heightWidthButton * 2).isActive = true
+        NSLayoutConstraint.activate([
+                moveLabel.heightAnchor.constraint(equalToConstant: heightWidthButton * 0.75),
+                moveLabel.widthAnchor.constraint(equalToConstant: heightWidthButton * 2)
+                                    ])
+        
         switch playerLabel {
         case firstPlayerLabel:
-            moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5).isActive = true
-            moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
-
+            NSLayoutConstraint.activate([
+                    moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5),
+                    moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5)
+                                        ])
         case secondPlayerLabel:
-            moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5).isActive = true
-            moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5).isActive = true
-
+            NSLayoutConstraint.activate([
+                    moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5),
+                    moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5)
+                                        ])
         default:
             return
         }

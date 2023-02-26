@@ -17,7 +17,7 @@ protocol NewTimeViewPresenterProtocol: AnyObject {
     func tapSaveButton()
 }
 
-class NewTimePresenter: NewTimeViewPresenterProtocol {
+final class NewTimePresenter: NewTimeViewPresenterProtocol {
     
     weak var view: NewTimeViewProtocol?
     var newTimeChess: NewTime

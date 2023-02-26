@@ -18,7 +18,7 @@ protocol SettingsViewPresenterProtocol: AnyObject {
     func tapCreateNewTime()
 }
 
-class SettingsPresenter: SettingsViewPresenterProtocol {
+final class SettingsPresenter: SettingsViewPresenterProtocol {
     
     weak var view: SettingsViewProtocol?
 //    var networkService: NetworkService!

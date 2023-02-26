@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
 
     var presenter: SettingsViewPresenterProtocol!
-    let startButton = UIButton()
-    var tableView = UITableView()
+    private let startButton = UIButton()
+    private var tableView = UITableView()
     
-    let heightCell: CGFloat = 50
+    private let heightCell: CGFloat = 50
     
     var objects: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
     
@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController {
     }
     
     
-    func configureTableView() {
+    private func configureTableView() {
         view.addSubview(tableView)
 //        set delegates
         setTableViewDelegates()
@@ -45,13 +45,15 @@ class SettingsViewController: UIViewController {
         tableView.register(TimeTableViewCell.self, forCellReuseIdentifier: Cells.textCell)
 //        set constraints
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(2 * heightCell)).isActive = true
-    }
+        NSLayoutConstraint.activate([
+                tableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
+                tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(2 * heightCell))
+                                    ])
+        }
     
-    func configureStartButton() {
+    private func configureStartButton() {
         view.addSubview(startButton)
         
         startButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
@@ -61,16 +63,18 @@ class SettingsViewController: UIViewController {
         createStartButtonConstraint()
     }
     
-    func createStartButtonConstraint() {
+    private func createStartButtonConstraint() {
         startButton.layer.cornerRadius = 3
         
-        startButton.heightAnchor.constraint(equalToConstant: heightCell).isActive = true
-        startButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        startButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -heightCell).isActive = true
+        NSLayoutConstraint.activate([
+                startButton.heightAnchor.constraint(equalToConstant: heightCell),
+                startButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+                startButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+                startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -heightCell)
+                                    ])
         
     }
-    func setTableViewDelegates() {
+    private func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
     }

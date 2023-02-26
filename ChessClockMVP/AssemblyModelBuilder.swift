@@ -13,7 +13,7 @@ protocol AssemblyBuilderProtocol {
     func createNewTimeModule(router: RouterProtocol) -> UIViewController
 }
 
-class AssemblyModelBuilder: AssemblyBuilderProtocol {
+final class AssemblyModelBuilder: AssemblyBuilderProtocol {
     
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
