@@ -15,7 +15,7 @@ final class SettingsViewController: UIViewController {
     
     private let heightCell: CGFloat = 50
     
-    var objects: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
+    var chessTimeOptions: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
     
     struct Cells {
         static let textCell = "textCell"
@@ -23,7 +23,7 @@ final class SettingsViewController: UIViewController {
 
 
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.whiteView
         configureTableView()
         configureStartButton()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
@@ -56,7 +56,8 @@ final class SettingsViewController: UIViewController {
     private func configureStartButton() {
         view.addSubview(startButton)
         
-        startButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+//        startButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        startButton.backgroundColor = UIColor.blueButton
         startButton.setTitle("START", for: .normal)
         startButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -85,12 +86,12 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return chessTimeOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.textCell) as! TimeTableViewCell
-        let object = objects[indexPath.row]
+        let object = chessTimeOptions[indexPath.row]
         cell.set(object: object)
         return cell
     }

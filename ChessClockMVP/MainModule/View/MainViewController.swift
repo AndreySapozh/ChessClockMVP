@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(red: 241/255, green: 238/255, blue: 228/255, alpha: 1)
+        view.backgroundColor = UIColor.whiteView
         
         configureButton(button: settingsButton)
         configureButton(button: pauseButton)
@@ -65,19 +65,19 @@ class MainViewController: UIViewController {
         
         view.addSubview(playerLabel)
        
-        playerLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
+        playerLabel.backgroundColor = UIColor.paleGreenLabel
         playerLabel.text = "01:00"
         playerLabel.textAlignment = .center
-        playerLabel.font = UIFont.systemFont(ofSize: 80)
+        playerLabel.font = UIFont.mainTimePlayers
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
  
         createPlayerLabelConstraint(playerLabel: playerLabel)
     }
     
     private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel, moveNumber: Int) {
-        moveLabel.backgroundColor = UIColor(red: 100/255, green: 240/255, blue: 240/255, alpha: 1)
+        moveLabel.backgroundColor = UIColor.paleGreenLabel
         moveLabel.text = " Moves: \(moveNumber)"
-        moveLabel.font = UIFont.systemFont(ofSize: 15)
+        moveLabel.font = UIFont.counterMoves
 
         movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
 
@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
     private func configureButton(button: UIButton) {
         
         view.addSubview(button)
-        button.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
+        button.backgroundColor = UIColor.blueButton
         button.translatesAutoresizingMaskIntoConstraints = false
         
         switch button {

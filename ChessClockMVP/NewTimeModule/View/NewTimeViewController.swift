@@ -16,6 +16,7 @@ final class NewTimeViewController: UIViewController {
     private let timeLabel = UILabel()
     private let incrementLabel = UILabel()
     private let advancedMode = UILabel()
+    private let timeTextLabel = UILabel()
     private let setTimeLabel = UILabel()
     private let setIncrementLabel = UILabel()
     private let switchAdvancedMode = UISwitch()
@@ -23,7 +24,7 @@ final class NewTimeViewController: UIViewController {
     override func viewDidLoad() {
         
         navigationItem.title = "Custom Time"
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.whiteView
         configureNameTextField()
         configureTimeLabel(label: timeLabel)
         configureIncrementLabel(label: incrementLabel)
@@ -44,30 +45,34 @@ final class NewTimeViewController: UIViewController {
         label.text = "Time"
 //        create text indent left
 //        label.textAlignment = .
-        label.backgroundColor = UIColor(red: 241/255, green: 249/255, blue: 0/255, alpha: 1.0)
+        label.backgroundColor = UIColor.yellowLabel
         createTimeLabelConstraint(label: label)
     }
     
     private func configureIncrementLabel(label: UILabel) {
         label.text = "Increment"
-        label.backgroundColor = UIColor(red: 241/255, green: 249/255, blue: 0/255, alpha: 1.0)
+        label.backgroundColor = UIColor.yellowLabel
         createTimeLabelConstraint(label: label)
         
     }
     
     private func configureAdvancedModeLabel(label: UILabel) {
         label.text = "Advanced Mode"
-        label.backgroundColor = UIColor(red: 241/255, green: 249/255, blue: 0/255, alpha: 1.0)
+        label.backgroundColor = UIColor.yellowLabel
         createTimeLabelConstraint(label: label)
         
+    }
+    
+    private func setTextTimeInLabel(label: UILabel) {
+        timeTextLabel.text = "Time"
     }
     
     private func setupTimeLabel(label: UILabel) {
         label.text = "0:00"
         label.textAlignment = .center
-        label.backgroundColor = UIColor(red: 120/255, green: 249/255, blue: 0/255, alpha: 1.0)
-        label.font = UIFont.systemFont(ofSize: 20)
-        setTimeLabelConstraint(label: label)
+        label.backgroundColor = UIColor.greenLabel
+        label.font = UIFont.setupTimeLabel
+        setTimeAndIncrementLabelConstraint(label: label)
     }
     
     private func createNameTextFieldConstraint() {
@@ -108,7 +113,7 @@ final class NewTimeViewController: UIViewController {
     }
     
     private func textColorIndentLeft(textFied: UITextField) {
-        nameTextField.backgroundColor = UIColor(red: 241/255, green: 249/255, blue: 0/255, alpha: 1.0)
+        nameTextField.backgroundColor = UIColor.yellowLabel
         nameTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: nameTextField.frame.height))
         nameTextField.leftViewMode = .always
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +123,7 @@ final class NewTimeViewController: UIViewController {
 
     }
     
-    private func setTimeLabelConstraint(label: UILabel) {
+    private func setTimeAndIncrementLabelConstraint(label: UILabel) {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 8
         view.addSubview(label)
@@ -143,6 +148,7 @@ final class NewTimeViewController: UIViewController {
         }
     }
     
+   
     private func createSwitchAdvancedModeConstraint() {
         
         view.addSubview(switchAdvancedMode)
