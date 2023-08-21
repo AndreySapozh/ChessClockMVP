@@ -13,7 +13,7 @@ protocol MainViewProtocol: AnyObject {
 protocol MainViewPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, time: Time, router: RouterProtocol)
     
-    func setTime(time: Time)
+    func showTime()
     func tapSettingsButton()
 }
 
@@ -33,11 +33,32 @@ final class MainPresenter: MainViewPresenterProtocol {
         router?.showSettings()
     }
     
-func setTime(time: Time) {
-        let time = String(self.time.seconds!) + String(self.time.minutes!)
-        self.view?.setTime(time: time)
+func showTime() {
+//        let time = String(self.time.seconds!) + String(self.time.minutes!)
+        let time = self.time.seconds!
+        let timeInFormat = makeTime(time: time)
+        self.view?.setTime(time: timeInFormat)
     }
     
+    func secondsToHoursToMinutesToSeconds(seconds: Int) -> (Int, Int, Int) {
+        return ((seconds / 3600), ((seconds % 3600) / 60), ((seconds % 3600) % 60))
+    }
+    
+    func makeTimeString(hours: Int, minutes: Int, seconds: Int) -> String {
+        var timeString = ""
+        timeString += String(format: "%02d", hours)
+        timeString += " : "
+        timeString += String(format: "%02d", minutes)
+        timeString += " : "
+        timeString += String(format: "%02d", seconds)
+        return timeString
+    }
+    
+    func makeTime(time: Int) -> String {
+        let time = self.secondsToHoursToMinutesToSeconds(seconds: time)
+        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        return timeString
+    }
     
     
 }

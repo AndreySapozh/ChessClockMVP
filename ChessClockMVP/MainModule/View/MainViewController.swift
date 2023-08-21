@@ -41,7 +41,10 @@ class MainViewController: UIViewController {
       
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
+        
     }
+    
+    
     
     @objc private func didTapSettingsButton() {
         presenter.tapSettingsButton()
@@ -64,9 +67,10 @@ class MainViewController: UIViewController {
     private func configurePlayerLabel(playerLabel: UILabel) {
         
         view.addSubview(playerLabel)
-       
+
+        self.presenter.showTime()
+        
         playerLabel.backgroundColor = UIColor.paleGreenLabel
-        playerLabel.text = "01:00"
         playerLabel.textAlignment = .center
         playerLabel.font = UIFont.mainTimePlayers
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -174,6 +178,8 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewProtocol {
     func setTime(time: String) {
         self.firstPlayerLabel.text = time
+        self.secondPlayerLabel.text = time
+        
     }
     
 }

@@ -7,8 +7,12 @@
 
 import Foundation
 
+//struct Time {
+//    var seconds: Int?
+//    var minutes: Int?
+//    var hours: Int?
+//}
+
 struct Time {
-    var seconds: Int?
-    var minutes: Int?
-    var hours: Int?
+    var seconds: Int? 
 }
