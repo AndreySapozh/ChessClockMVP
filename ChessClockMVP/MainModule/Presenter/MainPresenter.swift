@@ -5,40 +5,47 @@
 //  Created by Андрей Сапожников on 30.11.2022.
 
 import Foundation
+import UIKit
+
+var timerCounting: Bool = false
+var timer: Timer = Timer()
 
 protocol MainViewProtocol: AnyObject {
     func setTime(time: String)
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, time: Time, router: RouterProtocol)
+    init(view: MainViewProtocol, time: Time, router: RouterProtocol, timer: Timer)
     
     func showTime()
     func tapSettingsButton()
+    func startPlayerTimer()
 }
 
 final class MainPresenter: MainViewPresenterProtocol {
+    
     weak var view: MainViewProtocol?
-    let time: Time
+    var time: Time
     var router: RouterProtocol?
+    var timer: Timer
     
     
     
-    required init(view: MainViewProtocol, time: Time, router: RouterProtocol) {
+    required init(view: MainViewProtocol, time: Time, router: RouterProtocol, timer: Timer) {
         self.view = view
         self.time = time
         self.router = router
+        self.timer = timer
     }
     func tapSettingsButton() {
         router?.showSettings()
     }
     
 func showTime() {
-//        let time = String(self.time.seconds!) + String(self.time.minutes!)
         let time = self.time.seconds!
-        let timeInFormat = makeTime(time: time)
-        self.view?.setTime(time: timeInFormat)
-    }
+        let timeInString = makeTime(time: time)
+        self.view?.setTime(time: timeInString)
+}
     
     func secondsToHoursToMinutesToSeconds(seconds: Int) -> (Int, Int, Int) {
         return ((seconds / 3600), ((seconds % 3600) / 60), ((seconds % 3600) % 60))
@@ -60,5 +67,41 @@ func showTime() {
         return timeString
     }
     
+//    @objc func timerCounter(count: Int, playerLabel: UILabel) -> Void {
+//        self.time.seconds! -= 1
+//        let time = secondsToHoursToMinutesToSeconds(seconds: count)
+//        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+//        playerLabel.text = timeString
+//    }
+    
+    @objc func timerCounter(seconds: Int) -> String {
+        var seconds = self.time.seconds!
+        seconds -= 1
+        let time = secondsToHoursToMinutesToSeconds(seconds: seconds)
+        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        return timeString
+    }
+    
+//    @objc func timerCounter() -> Void {
+//        time.seconds! -= 1
+//        let time = secondsToHoursToMinutesToSeconds(seconds: time.seconds!)
+//        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+//        TimerLabel.text = timeString
+//    }
+
+    func startPlayerTimer() {
+
+        if (timerCounting) {
+
+            timerCounting = false
+            timer.invalidate()
+            
+            
+        }
+        else {
+            timerCounting = true
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        }
+    }
     
 }

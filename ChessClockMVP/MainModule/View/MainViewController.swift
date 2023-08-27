@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
     private let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,7 +180,6 @@ extension MainViewController: MainViewProtocol {
     func setTime(time: String) {
         self.firstPlayerLabel.text = time
         self.secondPlayerLabel.text = time
-        
     }
     
 }
