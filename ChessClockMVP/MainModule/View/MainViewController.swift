@@ -70,6 +70,8 @@ class MainViewController: UIViewController {
         view.addSubview(playerLabel)
         
         self.presenter.showTime()
+        playerLabel.isUserInteractionEnabled = true
+        playerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
         
         playerLabel.backgroundColor = UIColor.paleGreenLabel
         playerLabel.textAlignment = .center
@@ -176,6 +178,9 @@ class MainViewController: UIViewController {
         
     }
     
+    @objc func tapActionPlayerLabel() {
+        print("tap player label")
+    }
 }
 
 extension MainViewController: MainViewProtocol {
