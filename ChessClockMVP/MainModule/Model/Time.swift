@@ -10,5 +10,5 @@ import Foundation
 struct Time {
     var seconds: Int
     var name: String
-    var moveNumber: Int
+    var moveNumber = 0
 }
