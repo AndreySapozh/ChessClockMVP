@@ -36,7 +36,7 @@ final class SettingsPresenter: SettingsViewPresenterProtocol {
         self.view?.setTimeChess(timeChess: timeChess)
     }
     func tapStartButton() {
-        router?.popToRoot()
+        router?.popToRoot(time: Time(seconds: 60))
 
     }
     

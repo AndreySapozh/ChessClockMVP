@@ -34,7 +34,7 @@ final class NewTimePresenter: NewTimeViewPresenterProtocol {
     }
     
     func tapSaveButton() {
-        router?.popToRoot()
+        router?.popToRoot(time: Time(seconds: 60))
     }
    
     

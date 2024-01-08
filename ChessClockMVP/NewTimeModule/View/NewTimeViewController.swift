@@ -20,6 +20,7 @@ final class NewTimeViewController: UIViewController {
     private let setTimeLabel = UILabel()
     private let setIncrementLabel = UILabel()
     private let switchAdvancedMode = UISwitch()
+    private var playersNameSegmentedControl = UISegmentedControl()
     
     override func viewDidLoad() {
         
@@ -31,9 +32,46 @@ final class NewTimeViewController: UIViewController {
         configureAdvancedModeLabel(label: advancedMode)
         setupTimeLabel(label: setTimeLabel)
         setupTimeLabel(label: setIncrementLabel)
-        createSwitchAdvancedModeConstraint()
+        configureSwitchAdvancedMode()
+        configurePlayersNameSegmentedControl()
     }
     
+    
+    private func configureSwitchAdvancedMode() {
+        
+        createSwitchAdvancedModeConstraint()
+        switchAdvancedMode.addTarget(self, action: #selector(advancedModeTime), for: .valueChanged)
+    }
+    
+    @objc private func advancedModeTime(sender: UISwitch) {
+        if sender.isOn {
+            hideElementAdvancedMode()
+        } else {
+            showElementAdvancedMode()
+        }
+    }
+    
+    private func configurePlayersNameSegmentedControl() {
+        let playersNameTitles = ["Player One", "Player Two"]
+        playersNameSegmentedControl = UISegmentedControl(items: playersNameTitles)
+        playersNameSegmentedControl.selectedSegmentIndex = 0
+        playersNameSegmentedControl.isHidden = true
+        createPlayersNameSegmentedControlConstraint()
+    }
+    
+    private func createPlayersNameSegmentedControlConstraint() {
+            
+            view.addSubview(playersNameSegmentedControl)
+            
+            playersNameSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                playersNameSegmentedControl.heightAnchor.constraint(equalToConstant: defaultConstaint * 0.5),
+                playersNameSegmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint / 2),
+                playersNameSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint / 2),
+                playersNameSegmentedControl.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: defaultConstaint * 0.5)
+                                        ])
+        
+    }
     private func configureNameTextField() {
         
         nameTextField.placeholder = "Name"
@@ -74,6 +112,29 @@ final class NewTimeViewController: UIViewController {
         label.font = UIFont.setupTimeLabel
         setTimeAndIncrementLabelConstraint(label: label)
     }
+    
+    private func hideElementAdvancedMode() {
+        playersNameSegmentedControl.isHidden = false
+        timeLabel.isHidden = true
+        timeTextLabel.isHidden = true
+        incrementLabel.isHidden = true
+        timeTextLabel.isHidden = true
+        setTimeLabel.isHidden = true
+        setIncrementLabel.isHidden = true
+        
+    }
+    
+    private func showElementAdvancedMode() {
+        playersNameSegmentedControl.isHidden = true
+        timeLabel.isHidden = false
+        timeTextLabel.isHidden = false
+        incrementLabel.isHidden = false
+        timeTextLabel.isHidden = false
+        setTimeLabel.isHidden = false
+        setIncrementLabel.isHidden = false
+        
+    }
+    
     
     private func createNameTextFieldConstraint() {
                 

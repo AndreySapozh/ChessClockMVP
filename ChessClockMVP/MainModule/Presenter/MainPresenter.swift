@@ -15,22 +15,23 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-//    init(view: MainViewProtocol, time: Time, router: RouterProtocol, timer: Timer)
-    init(view: MainViewProtocol, time: Time, router: RouterProtocol)
+    init(view: MainViewProtocol, timeService: TimeServiceProtocol, router: RouterProtocol)
+//    init(view: MainViewProtocol, time: Time, router: RouterProtocol)
     
-    func showTime()
+//    func showTime()
     func showMoveNumber()
     func tapSettingsButton()
     func getTime()
+    func showTime()
     
 //    var timeArray: [Time] { get set }
 //    func startPlayerTimer()
 }
 
 final class MainPresenter: MainViewPresenterProtocol {
-    
+     
     weak var view: MainViewProtocol?
-    var time: Time
+    var timeService: TimeServiceProtocol
     var router: RouterProtocol?
 //  var timer: Timer
 //    var timeArray: [Time]
@@ -41,9 +42,9 @@ final class MainPresenter: MainViewPresenterProtocol {
     
     
 //    required init(view: MainViewProtocol, time: Time, router: RouterProtocol, timer: Timer) {
-    required init(view: MainViewProtocol, time: Time, router: RouterProtocol) {
+    required init(view: MainViewProtocol, timeService: TimeServiceProtocol, router: RouterProtocol) {
         self.view = view
-        self.time = time
+        self.timeService = timeService
         self.router = router
         //        self.timer = timer
     }
@@ -52,13 +53,22 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func showTime() {
-        let time = self.time.seconds
-        let timeInString = makeTime(time: time)
+//        let timeOne = timeService.getTime()
+        let timeOne = timeService.getTime(time: Time.init(seconds: 60))
+        print(timeOne)
+        let timeInString = makeTime(time: 120)
         self.view?.setTime(time: timeInString)
-}
+        
+    }
+//    func showTime() {
+//        let time = self.time.seconds
+//        let timeInString = makeTime(time: time)
+//        self.view?.setTime(time: timeInString)
+//}
     
     func showMoveNumber() {
-        let moveNumber = self.time.moveNumber
+//        let moveNumber = self.time.moveNumber
+        let moveNumber = 0
         self.view?.setMoveNumber(moveNumber: moveNumber)
     }
     

@@ -15,12 +15,12 @@ protocol RouterMain {
 protocol RouterProtocol: RouterMain {
     func initialViewController()
     func showSettings()
-    func popToRoot()
+//    func popToRoot()
+    func popToRoot(time: Time)
     func showCreateNewTime()
 }
 
 final class Router: RouterProtocol {
-    
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
     
@@ -53,7 +53,7 @@ final class Router: RouterProtocol {
         }
     }
     
-    func popToRoot() {
+    func popToRoot(time: Time) {
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         }

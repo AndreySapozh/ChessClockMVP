@@ -17,10 +17,13 @@ final class AssemblyModelBuilder: AssemblyBuilderProtocol {
     
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-        let time = Time(seconds: 120, name: "bullet", moveNumber: 1)
+//        let time = Time(seconds: 60)
+        let timeService = TimeService()
+//        let time = Time(seconds: 120, name: "bullet", moveNumber: 1)
 //        let time = Time(seconds: 180, )
 //        let presenter = MainPresenter(view: view, time: time, router: router, timer: Timer())
-        let presenter = MainPresenter(view: view, time: time, router: router)
+//        let presenter = MainPresenter(view: view, time: time, router: router)
+        let presenter = MainPresenter(view: view, timeService: timeService, router: router)
         view.presenter = presenter
         return view
     }
