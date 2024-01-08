@@ -45,9 +45,9 @@ final class NewTimeViewController: UIViewController {
     
     @objc private func advancedModeTime(sender: UISwitch) {
         if sender.isOn {
-            hideElementAdvancedMode()
+            hideOrShowElementAdvancedMode(bool: true)
         } else {
-            showElementAdvancedMode()
+            hideOrShowElementAdvancedMode(bool: false)
         }
     }
     
@@ -65,9 +65,9 @@ final class NewTimeViewController: UIViewController {
             
             playersNameSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                playersNameSegmentedControl.heightAnchor.constraint(equalToConstant: defaultConstaint * 0.5),
-                playersNameSegmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint / 2),
-                playersNameSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint / 2),
+                playersNameSegmentedControl.heightAnchor.constraint(equalToConstant: defaultConstaint * 0.66),
+                playersNameSegmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint * 0.5),
+                playersNameSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint * 0.5),
                 playersNameSegmentedControl.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: defaultConstaint * 0.5)
                                         ])
         
@@ -113,27 +113,17 @@ final class NewTimeViewController: UIViewController {
         setTimeAndIncrementLabelConstraint(label: label)
     }
     
-    private func hideElementAdvancedMode() {
-        playersNameSegmentedControl.isHidden = false
-        timeLabel.isHidden = true
-        timeTextLabel.isHidden = true
-        incrementLabel.isHidden = true
-        timeTextLabel.isHidden = true
-        setTimeLabel.isHidden = true
-        setIncrementLabel.isHidden = true
+    private func hideOrShowElementAdvancedMode(bool: Bool) {
+        playersNameSegmentedControl.isHidden = !bool
+        timeLabel.isHidden = bool
+        timeTextLabel.isHidden = bool
+        incrementLabel.isHidden = bool
+        timeTextLabel.isHidden = bool
+        setTimeLabel.isHidden = bool
+        setIncrementLabel.isHidden = bool
         
     }
-    
-    private func showElementAdvancedMode() {
-        playersNameSegmentedControl.isHidden = true
-        timeLabel.isHidden = false
-        timeTextLabel.isHidden = false
-        incrementLabel.isHidden = false
-        timeTextLabel.isHidden = false
-        setTimeLabel.isHidden = false
-        setIncrementLabel.isHidden = false
-        
-    }
+
     
     
     private func createNameTextFieldConstraint() {
