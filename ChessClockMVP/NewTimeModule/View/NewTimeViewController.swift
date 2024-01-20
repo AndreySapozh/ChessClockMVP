@@ -9,9 +9,10 @@ import UIKit
 
 final class NewTimeViewController: UIViewController {
     
+    
     var presenter: NewTimeViewPresenterProtocol!
     
-    private let defaultConstaint: CGFloat = 40
+    private let defaultConstaint: CGFloat = 40.0
     private let nameTextField = UITextField()
     private let timeLabel = UILabel()
     private let incrementLabel = UILabel()
@@ -21,6 +22,10 @@ final class NewTimeViewController: UIViewController {
     private let setIncrementLabel = UILabel()
     private let switchAdvancedMode = UISwitch()
     private var playersNameSegmentedControl = UISegmentedControl()
+    
+    private var stagesTableView = UITableView()
+    let identifire = "MyCell"
+    private var cellsNameStagesTableView = ["40 moves in 2 hr", "Game in 30 min", "Add Stage"]
     
     override func viewDidLoad() {
         
@@ -34,9 +39,36 @@ final class NewTimeViewController: UIViewController {
         setupTimeLabel(label: setIncrementLabel)
         configureSwitchAdvancedMode()
         configurePlayersNameSegmentedControl()
+        configureStagesTableView()
+    
     }
     
     
+    private func configureStagesTableView() {
+        view.addSubview(stagesTableView)
+        stagesTableView.isHidden = true
+
+//        set row height
+        stagesTableView.rowHeight = defaultConstaint
+//        register cells
+        stagesTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
+//        set delegates and dataSource
+        self.stagesTableView.delegate = self
+        self.stagesTableView.dataSource = self
+       
+        stagesTableView.layer.masksToBounds = true
+        stagesTableView.layer.cornerRadius = 8
+//        set constraints
+        stagesTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stagesTableView.heightAnchor.constraint(equalToConstant: defaultConstaint * 3),
+            stagesTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint * 0.5),
+            stagesTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint * 0.5),
+            stagesTableView.topAnchor.constraint(equalTo: playersNameSegmentedControl.bottomAnchor, constant: defaultConstaint)
+                                    ])
+        }
+ 
     private func configureSwitchAdvancedMode() {
         
         createSwitchAdvancedModeConstraint()
@@ -46,6 +78,7 @@ final class NewTimeViewController: UIViewController {
     @objc private func advancedModeTime(sender: UISwitch) {
         if sender.isOn {
             hideOrShowElementAdvancedMode(bool: true)
+//            constraintSwitchAdvancedIsOn()
         } else {
             hideOrShowElementAdvancedMode(bool: false)
         }
@@ -121,6 +154,7 @@ final class NewTimeViewController: UIViewController {
         timeTextLabel.isHidden = bool
         setTimeLabel.isHidden = bool
         setIncrementLabel.isHidden = bool
+        stagesTableView.isHidden = !bool
         
     }
 
@@ -207,6 +241,7 @@ final class NewTimeViewController: UIViewController {
         switchAdvancedMode.layer.cornerRadius = 8
         
         switchAdvancedMode.translatesAutoresizingMaskIntoConstraints = false
+       
         NSLayoutConstraint.activate([
                 switchAdvancedMode.widthAnchor.constraint(equalToConstant: defaultConstaint * 1.25),
                 switchAdvancedMode.topAnchor.constraint(equalTo: advancedMode.topAnchor, constant: defaultConstaint * 0.125),
@@ -222,3 +257,17 @@ extension NewTimeViewController: NewTimeViewProtocol {
     }
 }
    
+
+extension NewTimeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellsNameStagesTableView.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifire , for: indexPath)
+        cell.textLabel?.text = cellsNameStagesTableView[indexPath.row]
+        return cell
+    }
+    
+}
