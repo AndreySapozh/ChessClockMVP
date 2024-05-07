@@ -12,11 +12,12 @@ final class NewTimeViewController: UIViewController {
     
     var presenter: NewTimeViewPresenterProtocol!
     
-    private let defaultConstaint: CGFloat = 40.0
+    private let defaultConstraint: CGFloat = 40.0
     private let nameTextField = UITextField()
     private let timeLabel = UILabel()
     private let incrementLabel = UILabel()
-    private let advancedMode = UILabel()
+    private let advancedModeLabelSwitchIsOff = UILabel()
+    private let advancedModeLabelSwitchIsOn = UILabel()
     private let timeTextLabel = UILabel()
     private let setTimeLabel = UILabel()
     private let setIncrementLabel = UILabel()
@@ -34,9 +35,9 @@ final class NewTimeViewController: UIViewController {
         configureNameTextField()
         configureTimeLabel(label: timeLabel)
         configureIncrementLabel(label: incrementLabel)
-        configureAdvancedModeLabel(label: advancedMode)
         setupTimeLabel(label: setTimeLabel)
         setupTimeLabel(label: setIncrementLabel)
+        configureAdvancedModeLabel(label: advancedModeLabelSwitchIsOff)
         configureSwitchAdvancedMode()
         configurePlayersNameSegmentedControl()
         configureStagesTableView()
@@ -49,7 +50,7 @@ final class NewTimeViewController: UIViewController {
         stagesTableView.isHidden = true
 
 //        set row height
-        stagesTableView.rowHeight = defaultConstaint
+        stagesTableView.rowHeight = defaultConstraint
 //        register cells
         stagesTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
 //        set delegates and dataSource
@@ -62,25 +63,28 @@ final class NewTimeViewController: UIViewController {
         stagesTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stagesTableView.heightAnchor.constraint(equalToConstant: defaultConstaint * 3),
-            stagesTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint * 0.5),
-            stagesTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint * 0.5),
-            stagesTableView.topAnchor.constraint(equalTo: playersNameSegmentedControl.bottomAnchor, constant: defaultConstaint)
+            stagesTableView.heightAnchor.constraint(equalToConstant: defaultConstraint * 3),
+            stagesTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstraint * 0.5),
+            stagesTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstraint * 0.5),
+            stagesTableView.topAnchor.constraint(equalTo: playersNameSegmentedControl.bottomAnchor, constant: defaultConstraint)
                                     ])
         }
  
     private func configureSwitchAdvancedMode() {
         
-        createSwitchAdvancedModeConstraint()
-        switchAdvancedMode.addTarget(self, action: #selector(advancedModeTime), for: .valueChanged)
+        switchAdvancedMode.addTarget(self, action: #selector(advancedModeTime(sender: )), for: .valueChanged)
     }
     
     @objc private func advancedModeTime(sender: UISwitch) {
         if sender.isOn {
             hideOrShowElementAdvancedMode(bool: true)
-//            constraintSwitchAdvancedIsOn()
+            advancedModeLabelSwitchIsOff.isHidden = true
+            configureAdvancedModeLabel(label: advancedModeLabelSwitchIsOn)
         } else {
             hideOrShowElementAdvancedMode(bool: false)
+            advancedModeLabelSwitchIsOn.isHidden = true
+            configureAdvancedModeLabel(label: advancedModeLabelSwitchIsOff)
+
         }
     }
     
@@ -98,10 +102,10 @@ final class NewTimeViewController: UIViewController {
             
             playersNameSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                playersNameSegmentedControl.heightAnchor.constraint(equalToConstant: defaultConstaint * 0.66),
-                playersNameSegmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint * 0.5),
-                playersNameSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint * 0.5),
-                playersNameSegmentedControl.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: defaultConstaint * 0.5)
+                playersNameSegmentedControl.heightAnchor.constraint(equalToConstant: defaultConstraint * 0.66),
+                playersNameSegmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstraint * 0.5),
+                playersNameSegmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstraint * 0.5),
+                playersNameSegmentedControl.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: defaultConstraint * 0.5)
                                         ])
         
     }
@@ -130,7 +134,7 @@ final class NewTimeViewController: UIViewController {
     private func configureAdvancedModeLabel(label: UILabel) {
         label.text = "Advanced Mode"
         label.backgroundColor = UIColor.yellowLabel
-        createTimeLabelConstraint(label: label)
+        advancedLabelConstraint(advancedLabel: label)
         
     }
     
@@ -155,7 +159,6 @@ final class NewTimeViewController: UIViewController {
         setTimeLabel.isHidden = bool
         setIncrementLabel.isHidden = bool
         stagesTableView.isHidden = !bool
-        
     }
 
     
@@ -163,10 +166,10 @@ final class NewTimeViewController: UIViewController {
     private func createNameTextFieldConstraint() {
                 
         NSLayoutConstraint.activate([
-                nameTextField.heightAnchor.constraint(equalToConstant: defaultConstaint),
-                nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint / 2),
-                nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint / 2),
-                nameTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: defaultConstaint * 3)
+                nameTextField.heightAnchor.constraint(equalToConstant: defaultConstraint),
+                nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstraint / 2),
+                nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstraint / 2),
+                nameTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: defaultConstraint * 3)
                                     ])
         }
         
@@ -178,24 +181,71 @@ final class NewTimeViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                label.heightAnchor.constraint(equalToConstant: defaultConstaint),
-                label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint / 2),
-                label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint / 2)
+                label.heightAnchor.constraint(equalToConstant: defaultConstraint),
+                label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstraint / 2),
+                label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstraint / 2)
                                     ])
             switch label {
             case timeLabel:
-                label.topAnchor.constraint(equalTo: view.topAnchor, constant: defaultConstaint * 5).isActive = true
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: defaultConstraint * 5).isActive = true
                 label.layer.borderWidth = 0.5
             case incrementLabel:
                 label.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 0).isActive = true
                 label.layer.borderWidth = 0.5
-            case advancedMode:
-                label.topAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: defaultConstaint).isActive = true
+//            case advancedModeLabel:
+//                if switchAdvancedMode.isSelected {
+//                    label.topAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: defaultConstaint).isActive = true
+//                } else {
+//                    label.topAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: -defaultConstaint * 3 )
+//                }
+//                label.topAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: defaultConstaint).isActive = true
+
             default:
                 return
             }
 
     }
+    
+    private func advancedLabelConstraint(advancedLabel: UILabel) {
+        view.addSubview(advancedLabel)
+        advancedLabel.layer.masksToBounds = true
+        advancedLabel.layer.cornerRadius = 8
+        createSwitchAdvancedModeConstraint(advancedModeLabel: advancedLabel)
+        
+        advancedLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+        NSLayoutConstraint.activate([
+                advancedLabel.heightAnchor.constraint(equalToConstant: defaultConstraint),
+                advancedLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstraint / 2),
+                advancedLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstraint / 2)
+//                advancedLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: defaultConstaint * 2)
+                                    ])
+        switch advancedLabel {
+        case advancedModeLabelSwitchIsOff:
+            advancedLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: defaultConstraint * 2).isActive = true
+        case advancedModeLabelSwitchIsOn:
+            advancedLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: defaultConstraint * 4).isActive = true
+        default:
+            return
+        }
+    }
+    
+//    private func advancedLabelConstraintSwitchIsOn(advancedLabel: UILabel) {
+//        view.addSubview(advancedLabel)
+//        advancedLabel.layer.masksToBounds = true
+//        advancedLabel.layer.cornerRadius = 8
+//        createSwitchAdvancedModeConstraint(advancedModeLabel: advancedModeLabelSwitchIsOn)
+//        
+//        advancedLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//    
+//        NSLayoutConstraint.activate([
+//            advancedLabel.heightAnchor.constraint(equalToConstant: defaultConstaint),
+//            advancedLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: defaultConstaint / 2),
+//            advancedLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -defaultConstaint / 2),
+//            advancedLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: defaultConstaint * 4)
+//                                    ])
+//    }
     
     private func textColorIndentLeft(textFied: UITextField) {
         nameTextField.backgroundColor = UIColor.yellowLabel
@@ -217,24 +267,24 @@ final class NewTimeViewController: UIViewController {
         switch label {
         case setTimeLabel:
             NSLayoutConstraint.activate([
-                    label.widthAnchor.constraint(equalToConstant: defaultConstaint * 1.25),
-                    label.topAnchor.constraint(equalTo: timeLabel.topAnchor, constant: defaultConstaint * 0.125),
-                    label.rightAnchor.constraint(equalTo: timeLabel.rightAnchor, constant: -defaultConstaint * 0.4),
-                    label.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: -defaultConstaint * 0.125)
+                    label.widthAnchor.constraint(equalToConstant: defaultConstraint * 1.25),
+                    label.topAnchor.constraint(equalTo: timeLabel.topAnchor, constant: defaultConstraint * 0.125),
+                    label.rightAnchor.constraint(equalTo: timeLabel.rightAnchor, constant: -defaultConstraint * 0.4),
+                    label.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: -defaultConstraint * 0.125)
                                         ])
         case setIncrementLabel:
             NSLayoutConstraint.activate([
-                    label.widthAnchor.constraint(equalToConstant: defaultConstaint * 1.25),
-                    label.rightAnchor.constraint(equalTo: incrementLabel.rightAnchor, constant: -defaultConstaint * 0.4),
-                    label.topAnchor.constraint(equalTo: incrementLabel.topAnchor, constant: defaultConstaint * 0.125),
-                    label.bottomAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: -defaultConstaint * 0.125)
+                    label.widthAnchor.constraint(equalToConstant: defaultConstraint * 1.25),
+                    label.rightAnchor.constraint(equalTo: incrementLabel.rightAnchor, constant: -defaultConstraint * 0.4),
+                    label.topAnchor.constraint(equalTo: incrementLabel.topAnchor, constant: defaultConstraint * 0.125),
+                    label.bottomAnchor.constraint(equalTo: incrementLabel.bottomAnchor, constant: -defaultConstraint * 0.125)
                                         ])
         default: return
         }
     }
     
    
-    private func createSwitchAdvancedModeConstraint() {
+    private func createSwitchAdvancedModeConstraint(advancedModeLabel: UILabel) {
         
         view.addSubview(switchAdvancedMode)
         switchAdvancedMode.layer.masksToBounds = true
@@ -243,10 +293,10 @@ final class NewTimeViewController: UIViewController {
         switchAdvancedMode.translatesAutoresizingMaskIntoConstraints = false
        
         NSLayoutConstraint.activate([
-                switchAdvancedMode.widthAnchor.constraint(equalToConstant: defaultConstaint * 1.25),
-                switchAdvancedMode.topAnchor.constraint(equalTo: advancedMode.topAnchor, constant: defaultConstaint * 0.125),
-                switchAdvancedMode.rightAnchor.constraint(equalTo: advancedMode.rightAnchor, constant: -defaultConstaint * 0.4),
-                switchAdvancedMode.bottomAnchor.constraint(equalTo: advancedMode.bottomAnchor, constant: -defaultConstaint * 0.125)
+                switchAdvancedMode.widthAnchor.constraint(equalToConstant: defaultConstraint * 1.25),
+                switchAdvancedMode.topAnchor.constraint(equalTo: advancedModeLabel.topAnchor, constant: defaultConstraint * 0.125),
+                switchAdvancedMode.rightAnchor.constraint(equalTo: advancedModeLabel.rightAnchor, constant: -defaultConstraint * 0.4),
+                switchAdvancedMode.bottomAnchor.constraint(equalTo: advancedModeLabel.bottomAnchor, constant: -defaultConstraint * 0.125)
                                     ])
     }
 }
