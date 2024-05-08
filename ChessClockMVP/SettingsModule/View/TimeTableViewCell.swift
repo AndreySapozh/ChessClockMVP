@@ -9,7 +9,7 @@ import UIKit
 
 
 final class TimeTableViewCell: UITableViewCell {
-
+    
     var timeTitleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,11 +35,11 @@ final class TimeTableViewCell: UITableViewCell {
     func setTimeTitleLabelConstraints() {
         timeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-                timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-                timeTitleLabel.heightAnchor.constraint(equalToConstant: 80),
-                timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-                                    ])
+            timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            timeTitleLabel.heightAnchor.constraint(equalToConstant: 80),
+            timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
     
 }

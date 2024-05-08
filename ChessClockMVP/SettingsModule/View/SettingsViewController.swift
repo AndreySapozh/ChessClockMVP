@@ -15,7 +15,13 @@ final class SettingsViewController: UIViewController {
     
     private let heightCell: CGFloat = 50
     
-    var chessTimeOptions: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
+    var chessTimeOptions: [TimeChess] = [
+        TimeChess(timeChess: "Create custom time"),
+        TimeChess(timeChess: "Fischer Blitz 5|0"),
+        TimeChess(timeChess: "Fischer 5|5"),
+        TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
+ 
+
     
     struct Cells {
         static let textCell = "textCell"
@@ -24,10 +30,18 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.whiteView
+        setupNavigationItem()
         configureTableView()
         configureStartButton()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
 
+    }
+    
+    func setupNavigationItem() {
+        navigationItem.title = "Time Controls"
+        let backItem = UIBarButtonItem()
+        backItem.title = "Cancel"
+        navigationItem.backBarButtonItem = backItem
     }
     
     @objc private func didTapStartButton() {

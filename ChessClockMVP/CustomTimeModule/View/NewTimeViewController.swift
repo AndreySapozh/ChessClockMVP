@@ -31,6 +31,8 @@ final class NewTimeViewController: UIViewController {
     override func viewDidLoad() {
         
         navigationItem.title = "Custom Time"
+//        navigationItem.hidesBackButton = true
+        navigationItem.backBarButtonItem?.title = "Cancel"
         view.backgroundColor = UIColor.whiteView
         configureNameTextField()
         configureTimeLabel(label: timeLabel)
