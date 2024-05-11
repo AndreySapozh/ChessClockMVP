@@ -30,18 +30,33 @@ final class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.whiteView
-        setupNavigationItem()
+        setupNavigationBar()
         configureTableView()
         configureStartButton()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
 
     }
     
-    func setupNavigationItem() {
+    private func setupNavigationBar() {
         navigationItem.title = "Time Controls"
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"
         navigationItem.backBarButtonItem = backItem
+        moveDeleteRowsRightBarButton()
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    private func moveDeleteRowsRightBarButton() {
+        let rightBarButton = UIBarButtonItem(title: "Done",
+                                             style: UIBarButtonItem.Style.plain,
+                                             target: self,
+                                             action: #selector(moveDeleteRows))
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc private func moveDeleteRows() {
+// to correct on move and delete rows
+        presenter.tapStartButton()
     }
     
     @objc private func didTapStartButton() {

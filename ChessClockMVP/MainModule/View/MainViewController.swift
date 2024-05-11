@@ -29,9 +29,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor.whiteView
         
+        setupNavigationController()
         configureButton(button: settingsButton)
         configureButton(button: pauseButton)
         configureButton(button: resetButton)
@@ -64,6 +64,12 @@ class MainViewController: UIViewController {
         
     }
     
+    private func setupNavigationController() {
+        navigationController?.navigationBar.tintColor = .black
+        let backItem = UIBarButtonItem()
+        backItem.title = "Clock"
+        navigationItem.backBarButtonItem = backItem
+    }
     
     private func configurePlayerLabel(playerLabel: UILabel) {
         
