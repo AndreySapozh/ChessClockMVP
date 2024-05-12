@@ -17,13 +17,6 @@ final class AssemblyModelBuilder: AssemblyBuilderProtocol {
     
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-//        let time = Time(seconds: 60)
-//        let timeService = TimeService()
-//        let time = Time(seconds: 120, name: "bullet", moveNumber: 1)
-//        let time = Time(seconds: 180, )
-//        let presenter = MainPresenter(view: view, time: time, router: router, timer: Timer())
-//        let presenter = MainPresenter(view: view, time: time, router: router)
-//        let presenter = MainPresenter(view: view, timeService: timeService, router: router)
         let presenter = MainPresenter(view: view, router: router)
         view.presenter = presenter
         return view
@@ -31,14 +24,15 @@ final class AssemblyModelBuilder: AssemblyBuilderProtocol {
 
     func createSettingsModule(router: RouterProtocol) -> UIViewController {
         let view = SettingsViewController()
-        let timeChess = TimeChess(timeChess: "first")
+        guard let seconds = presets.first?.seconds else { return view}
+        let timeChess = Time(seconds: seconds)
         let presenter = SettingsPresenter(view: view, router: router, timeChess: timeChess)
         view.presenter = presenter
         return view
     }
     func createNewTimeModule(router: RouterProtocol) -> UIViewController {
         let view = NewTimeViewController()
-        let newTime = NewTime(newTimeSeconds: 60)
+        let newTime = Time(seconds: 60)
         let presenter = NewTimePresenter(view: view, newTimeChess: newTime, router: router)
         view.presenter = presenter
         return view

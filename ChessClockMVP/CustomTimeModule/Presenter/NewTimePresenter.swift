@@ -8,11 +8,12 @@
 import Foundation
 
 protocol NewTimeViewProtocol: AnyObject {
-    func createTimeChess(newTimeChess: NewTime)
+    func createTimeChess(newTimeChess: Time)
+
 }
 
 protocol NewTimeViewPresenterProtocol: AnyObject {
-    init(view: NewTimeViewProtocol, newTimeChess: NewTime, router: RouterProtocol)
+    init(view: NewTimeViewProtocol, newTimeChess: Time, router: RouterProtocol)
     func createTime()
     func tapSaveButton()
 }
@@ -20,10 +21,11 @@ protocol NewTimeViewPresenterProtocol: AnyObject {
 final class NewTimePresenter: NewTimeViewPresenterProtocol {
     
     weak var view: NewTimeViewProtocol?
-    var newTimeChess: NewTime
+    var newTimeChess: Time
+    
     var router: RouterProtocol?
     
-    required init(view: NewTimeViewProtocol, newTimeChess: NewTime, router: RouterProtocol) {
+    required init(view: NewTimeViewProtocol, newTimeChess: Time, router: RouterProtocol) {
         self.view = view
         self.newTimeChess = newTimeChess
         self.router = router

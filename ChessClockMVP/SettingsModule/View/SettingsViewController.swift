@@ -15,12 +15,6 @@ final class SettingsViewController: UIViewController {
     
     private let heightCell: CGFloat = 50
     
-    var chessTimeOptions: [TimeChess] = [
-        TimeChess(timeChess: "Create custom time"),
-        TimeChess(timeChess: "Fischer Blitz 5|0"),
-        TimeChess(timeChess: "Fischer 5|5"),
-        TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
- 
     private let timeChess: [Time] = presets
     
     struct Cells {
@@ -141,7 +135,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingsViewController: SettingsViewProtocol {
-    func setTimeChess(timeChess: TimeChess ) {
+    func setTimeChess(timeChess: Time) {
         print(timeChess)
     }
     

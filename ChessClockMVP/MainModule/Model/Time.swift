@@ -14,7 +14,6 @@ struct Time {
             return String(seconds) + " seconds"
         }
     }
-//    var moveNumber = 0
 }
 
 
