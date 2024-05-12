@@ -12,7 +12,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, timeService: TimeServiceProtocol, router: RouterProtocol)
+    init(view: MainViewProtocol, router: RouterProtocol)
     
     func showMoveNumber()
     func tapSettingsButton()
@@ -23,12 +23,10 @@ protocol MainViewPresenterProtocol: AnyObject {
 final class MainPresenter: MainViewPresenterProtocol {
     
     weak var view: MainViewProtocol?
-    var timeService: TimeServiceProtocol
     var router: RouterProtocol?
 
-    required init(view: MainViewProtocol, timeService: TimeServiceProtocol, router: RouterProtocol) {
+    required init(view: MainViewProtocol, router: RouterProtocol) {
         self.view = view
-        self.timeService = timeService
         self.router = router
     }
     func getTime() {
@@ -39,9 +37,9 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func showTime() {
-        let timeOne = timeService.getTime(time: Time.init(seconds: 60))
-        print(timeOne)
-        let timeInString = makeTime(time: 120)
+        guard let timeInInt = presets.first?.seconds else { return }
+        let timeInString = makeTime(time: timeInInt)
+//        let timeInString = makeTime(time: 3661)
         self.view?.setTime(time: timeInString)
         
     }

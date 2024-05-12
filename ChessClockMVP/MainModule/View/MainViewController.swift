@@ -87,7 +87,6 @@ class MainViewController: UIViewController {
         createPlayerLabelConstraint(playerLabel: playerLabel)
     }
     
-    //    private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel, moveNumber: Int) {
     private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel) {
         self.presenter.showMoveNumber()
         

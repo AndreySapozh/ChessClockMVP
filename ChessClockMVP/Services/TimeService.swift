@@ -11,10 +11,10 @@ protocol TimeServiceProtocol {
     func getTime(time: Time)
 }
 
-class TimeService: TimeServiceProtocol {
-    func getTime(time: Time) {
-        let time = presets.first
-    }
-    
-    
-}
+//class TimeService: TimeServiceProtocol {
+//    func getTime(time: Time) {
+//        let time = presets.first
+//    }
+//    
+//    
+//}
