@@ -23,9 +23,13 @@ final class TimeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(object: TimeChess) {
-        self.timeTitleLabel.text = object.timeChess
+//    func set(object: TimeChess) {
+//        self.timeTitleLabel.text = object.timeChess
+//    }
+    func set(object: Time) {
+        self.timeTitleLabel.text = object.name
     }
+    
     
     func configureTitleLabel()  {
         timeTitleLabel.numberOfLines = 0

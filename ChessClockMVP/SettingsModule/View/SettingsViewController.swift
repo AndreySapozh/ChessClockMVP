@@ -21,7 +21,7 @@ final class SettingsViewController: UIViewController {
         TimeChess(timeChess: "Fischer 5|5"),
         TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
  
-
+    private let timeChess: [Time] = presets
     
     struct Cells {
         static let textCell = "textCell"
@@ -115,14 +115,19 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chessTimeOptions.count
+//        return chessTimeOptions.count
+        return timeChess.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.textCell) as! TimeTableViewCell
-        let object = chessTimeOptions[indexPath.row]
-        cell.set(object: object)
+//        let object = chessTimeOptions[indexPath.row]
+//        cell.set(object: object)
+        let objectTimeChess = timeChess[indexPath.row]
+        cell.set(object: objectTimeChess)
         return cell
+        
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

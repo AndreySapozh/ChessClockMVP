@@ -9,7 +9,11 @@ import Foundation
 
 struct Time {
     var seconds: Int
-//    var name: String
+    var name: String {
+        get {
+            return String(seconds) + " seconds"
+        }
+    }
 //    var moveNumber = 0
 }
 

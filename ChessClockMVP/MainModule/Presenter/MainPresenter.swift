@@ -37,9 +37,8 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func showTime() {
-        guard let timeInInt = presets.first?.seconds else { return }
+        guard let timeInInt = presets.last?.seconds else { return }
         let timeInString = makeTime(time: timeInInt)
-//        let timeInString = makeTime(time: 3661)
         self.view?.setTime(time: timeInString)
         
     }
