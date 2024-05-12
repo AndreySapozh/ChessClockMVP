@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIFont {
-    static let mainTimePlayers = UIFont(name: "Arial", size: 70)
+    static let mainTimePlayers = UIFont(name: "Arial", size: 75)
     static let counterMoves = UIFont(name: "Arial", size: 15)
     static let setupTimeLabel = UIFont(name: "Arial", size: 20)
     

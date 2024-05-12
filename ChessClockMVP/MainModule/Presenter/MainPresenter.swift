@@ -37,7 +37,7 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func showTime() {
-        guard let timeInInt = presets.last?.seconds else { return }
+        guard let timeInInt = presets.first?.seconds else { return }
         let timeInString = makeTime(time: timeInInt)
         self.view?.setTime(time: timeInString)
         
@@ -54,12 +54,19 @@ final class MainPresenter: MainViewPresenterProtocol {
     
     func makeTimeString(hours: Int, minutes: Int, seconds: Int) -> String {
         var timeString = ""
-        timeString += String(format: "%02d", hours)
-        timeString += " : "
-        timeString += String(format: "%02d", minutes)
-        timeString += " : "
-        timeString += String(format: "%02d", seconds)
-        return timeString
+        if hours > 0 {
+            timeString += String(format: "%2d", hours)
+            timeString += " : "
+            timeString += String(format: "%02d", minutes)
+            timeString += " : "
+            timeString += String(format: "%02d", seconds)
+            return timeString
+        } else {
+            timeString += String(format: "%2d", minutes)
+            timeString += " : "
+            timeString += String(format: "%02d", seconds)
+            return timeString
+        }
     }
     
     func makeTime(time: Int) -> String {
