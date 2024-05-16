@@ -147,14 +147,14 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
 }
+
+extension SettingsViewController: UITableViewDelegate {
     
-    extension SettingsViewController: UITableViewDelegate {
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            let timeChess = presenter.timeChess[indexPath.row]
-//            presenter.selectedTimeChess(timeChess: timeChess)
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //            let timeChess = presenter.timeChess[indexPath.row]
+        //            presenter.selectedTimeChess(timeChess: timeChess)
     }
+}
 
 extension SettingsViewController: SettingsViewProtocol {
     func setTimeChess(timeChess: Time) {

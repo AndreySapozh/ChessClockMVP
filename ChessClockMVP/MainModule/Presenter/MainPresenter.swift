@@ -5,6 +5,7 @@
 //  Created by Андрей Сапожников on 30.11.2022.
 
 import Foundation
+import UIKit
 
 protocol MainViewProtocol: AnyObject {
     func setTime(time: String)
@@ -17,7 +18,8 @@ protocol MainViewPresenterProtocol: AnyObject {
     func showMoveNumber()
     func tapSettingsButton()
     func getTime()
-    func showTime()
+    func tapPauseButton()
+    func tapResetButton()
 }
 
 final class MainPresenter: MainViewPresenterProtocol {
@@ -28,24 +30,34 @@ final class MainPresenter: MainViewPresenterProtocol {
     required init(view: MainViewProtocol, router: RouterProtocol) {
         self.view = view
         self.router = router
+        getTime()
     }
-    func getTime() {
-        
-    }
+//    func getTime() {
+//
+//    }
     func tapSettingsButton() {
         router?.showSettings()
     }
     
-    func showTime() {
+    func getTime() {
         guard let timeInInt = presets.first?.seconds else { return }
         let timeInString = makeTime(time: timeInInt)
         self.view?.setTime(time: timeInString)
         
     }
     
+    
     func showMoveNumber() {
         let moveNumber = 0
         self.view?.setMoveNumber(moveNumber: moveNumber)
+    }
+    
+    func tapPauseButton() {
+        // tapped pause button logic
+    }
+    
+    func tapResetButton() {
+//        tapped restore button logic
     }
     
     func secondsToHoursToMinutesToSeconds(seconds: Int) -> (Int, Int, Int) {

@@ -35,6 +35,7 @@ final class SettingsPresenter: SettingsViewPresenterProtocol {
     }
     func tapStartButton() {
         router?.popToRoot(time: Time(seconds: 60))
+        
 
     }
     

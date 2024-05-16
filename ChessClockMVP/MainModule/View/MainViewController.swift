@@ -44,6 +44,7 @@ class MainViewController: UIViewController {
         
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
+        pauseButton.addTarget(self, action: #selector(didTapPauseButton), for: .touchUpInside)
         
     }
     
@@ -51,7 +52,12 @@ class MainViewController: UIViewController {
         presenter.tapSettingsButton()
     }
     
+    @objc private func didTapPauseButton() {
+        presenter.tapPauseButton()
+    }
+    
     @objc private func didTapResetButton() {
+//        presenter.tapRestoreButton()
         let alert = UIAlertController(title: nil, message: "Reset the clock?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (_) in
             // do nothing
@@ -59,9 +65,9 @@ class MainViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
             //            update chess time
+            self.presenter.tapResetButton()
         }))
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     private func setupNavigationController() {
@@ -74,8 +80,8 @@ class MainViewController: UIViewController {
     private func configurePlayerLabel(playerLabel: UILabel) {
         
         view.addSubview(playerLabel)
-        
-        self.presenter.showTime()
+//        presenter.getTime()
+//        self.presenter.showTime()
         playerLabel.isUserInteractionEnabled = true
         playerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
         

@@ -17,6 +17,7 @@ protocol RouterProtocol: RouterMain {
     func showSettings()
 //    func popToRoot()
     func popToRoot(time: Time)
+    func goToMainScreen(timeChess: Time)
     
     func showCreateNewTime()
 }
@@ -55,6 +56,12 @@ final class Router: RouterProtocol {
     }
     
     func popToRoot(time: Time) {
+        if let navigationController = navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+    }
+    
+    func goToMainScreen(timeChess: Time) {
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         }
