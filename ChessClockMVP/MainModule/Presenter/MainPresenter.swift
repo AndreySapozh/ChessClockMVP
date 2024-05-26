@@ -5,7 +5,6 @@
 //  Created by Андрей Сапожников on 30.11.2022.
 
 import Foundation
-import UIKit
 
 protocol MainViewProtocol: AnyObject {
     func setTime(time: String)
@@ -13,24 +12,30 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, router: RouterProtocol)
+    init(view: MainViewProtocol, router: RouterProtocol, timer: Timer)
     
     func showMoveNumber()
     func tapSettingsButton()
     func getTime()
     func tapPauseButton()
     func tapResetButton()
+    func startTimer()
 }
 
 final class MainPresenter: MainViewPresenterProtocol {
     
     weak var view: MainViewProtocol?
     var router: RouterProtocol?
+    var timeChess: Int
+    var timer: Timer
 
-    required init(view: MainViewProtocol, router: RouterProtocol) {
+    required init(view: MainViewProtocol, router: RouterProtocol, timer: Timer) {
         self.view = view
         self.router = router
-        getTime()
+//        getTime()
+        timeChess = presets.first?.seconds ?? 60
+        self.timer = timer
+        
     }
 //    func getTime() {
 //
@@ -87,4 +92,15 @@ final class MainPresenter: MainViewPresenterProtocol {
         return timeString
     }
     
+    @objc func timerCounter() -> Void {
+        timeChess -= 1
+        let time = secondsToHoursToMinutesToSeconds(seconds: timeChess)
+        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        self.view?.setTime(time: timeString)
+//        TimerLabel.text = timeString
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+    }
 }

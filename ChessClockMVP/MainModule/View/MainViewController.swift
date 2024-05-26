@@ -191,6 +191,7 @@ class MainViewController: UIViewController {
     
     @objc func tapActionPlayerLabel() {
         print("tap player label")
+        presenter.startTimer()
     }
 }
 
