@@ -11,8 +11,8 @@ class MainViewController: UIViewController {
     
     var presenter: MainViewPresenterProtocol!
     
-    private let firstPlayerLabel = UILabel()
-    private let secondPlayerLabel = UILabel()
+    private let topPlayerLabel = UILabel()
+    private let bottomPlayerLabel = UILabel()
     private let settingsButton = UIButton()
     private let pauseButton = UIButton()
     private let resetButton = UIButton()
@@ -36,11 +36,13 @@ class MainViewController: UIViewController {
         configureButton(button: pauseButton)
         configureButton(button: resetButton)
         
-        configurePlayerLabel(playerLabel: firstPlayerLabel)
-        configurePlayerLabel(playerLabel: secondPlayerLabel)
+//        configurePlayerLabel(playerLabel: topPlayerLabel)
+//        configurePlayerLabel(playerLabel: bottomPlayerLabel)
+        configureTopPlayerLabel()
+        configureBottomPlayerLabel()
         
-        configureMovesCounter(moveLabel: movesCounterFirstPlayer, playerLabel: firstPlayerLabel)
-        configureMovesCounter(moveLabel: movesCounterSecondPlayer, playerLabel: secondPlayerLabel)
+        configureMovesCounter(moveLabel: movesCounterFirstPlayer, playerLabel: topPlayerLabel)
+        configureMovesCounter(moveLabel: movesCounterSecondPlayer, playerLabel: bottomPlayerLabel)
         
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
@@ -77,21 +79,50 @@ class MainViewController: UIViewController {
         navigationItem.backBarButtonItem = backItem
     }
     
-    private func configurePlayerLabel(playerLabel: UILabel) {
-        
-        view.addSubview(playerLabel)
+//    private func configurePlayerLabel(playerLabel: UILabel) {
+//        
+//        view.addSubview(playerLabel)
 //        presenter.getTime()
-//        self.presenter.showTime()
-        playerLabel.isUserInteractionEnabled = true
-        playerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
+////        self.presenter.showTime()
+//        playerLabel.isUserInteractionEnabled = true
+//        playerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
+//        
+//        playerLabel.backgroundColor = UIColor.paleGreenLabel
+//        playerLabel.textAlignment = .center
+//        playerLabel.font = UIFont.mainTimePlayers
+//        playerLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        createPlayerLabelConstraint(playerLabel: playerLabel)
+//    }
+    
+    private func configureTopPlayerLabel() {
+        view.addSubview(topPlayerLabel)
+        presenter.getTime()
+        topPlayerLabel.isUserInteractionEnabled = true
+        topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
         
-        playerLabel.backgroundColor = UIColor.paleGreenLabel
-        playerLabel.textAlignment = .center
-        playerLabel.font = UIFont.mainTimePlayers
-        playerLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        createPlayerLabelConstraint(playerLabel: playerLabel)
+        topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        topPlayerLabel.textAlignment = .center
+        topPlayerLabel.font = UIFont.mainTimePlayers
+        topPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        createTopPlayerConstraint()
     }
+    
+    private func configureBottomPlayerLabel() {
+        view.addSubview(bottomPlayerLabel)
+        presenter.getTime()
+        bottomPlayerLabel.isUserInteractionEnabled = true
+        bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
+        
+        bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        bottomPlayerLabel.textAlignment = .center
+        bottomPlayerLabel.font = UIFont.mainTimePlayers
+        bottomPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        createBottomPlayerConstraint()
+    }
+    
     
     private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel) {
         self.presenter.showMoveNumber()
@@ -123,22 +154,45 @@ class MainViewController: UIViewController {
         createButtonConstraint(button: button)
     }
     
-    private func createPlayerLabelConstraint(playerLabel: UILabel) {
-        
-        playerLabel.layer.masksToBounds = true
-        playerLabel.layer.cornerRadius = 10
+//    private func createPlayerLabelConstraint(playerLabel: UILabel) {
+//        
+//        playerLabel.layer.masksToBounds = true
+//        playerLabel.layer.cornerRadius = 10
+//        NSLayoutConstraint.activate([
+//            playerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+//            playerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+//            playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
+//        ])
+//        if playerLabel == topPlayerLabel {
+//            playerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
+//            playerLabel.transform = CGAffineTransformMakeRotation(3.14)
+//        } else {
+//            playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait).isActive = true
+//        }
+//    }
+    private func createTopPlayerConstraint() {
+        topPlayerLabel.layer.masksToBounds = true
+        topPlayerLabel.layer.cornerRadius = 10
         NSLayoutConstraint.activate([
-            playerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            playerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            playerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
+            topPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            topPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            topPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45),
+            topPlayerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait)
         ])
-        if playerLabel == firstPlayerLabel {
-            playerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topBottomConstrait).isActive = true
-            playerLabel.transform = CGAffineTransformMakeRotation(3.14)
-        } else {
-            playerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait).isActive = true
-        }
+        topPlayerLabel.transform = CGAffineTransformMakeRotation(3.14)
     }
+    
+    private func createBottomPlayerConstraint() {
+        bottomPlayerLabel.layer.masksToBounds = true
+        bottomPlayerLabel.layer.cornerRadius = 10
+        NSLayoutConstraint.activate([
+            bottomPlayerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            bottomPlayerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            bottomPlayerLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45),
+            bottomPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait)
+        ])
+    }
+    
     
     private func createButtonConstraint(button: UIButton) {
         button.layer.cornerRadius = 3
@@ -173,12 +227,12 @@ class MainViewController: UIViewController {
         ])
         
         switch playerLabel {
-        case firstPlayerLabel:
+        case topPlayerLabel:
             NSLayoutConstraint.activate([
                 moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5),
                 moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5)
             ])
-        case secondPlayerLabel:
+        case bottomPlayerLabel:
             NSLayoutConstraint.activate([
                 moveLabel.topAnchor.constraint(equalTo: playerLabel.topAnchor, constant: heightWidthButton * 0.5),
                 moveLabel.rightAnchor.constraint(equalTo: playerLabel.rightAnchor, constant: -heightWidthButton * 0.5)
@@ -197,8 +251,8 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainViewProtocol {
     func setTime(time: String) {
-        self.firstPlayerLabel.text = time
-        self.secondPlayerLabel.text = time
+        self.topPlayerLabel.text = time
+        self.bottomPlayerLabel.text = time
     }
     
     func setMoveNumber(moveNumber: Int) {
