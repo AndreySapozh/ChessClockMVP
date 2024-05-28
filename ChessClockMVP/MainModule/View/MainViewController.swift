@@ -41,8 +41,8 @@ class MainViewController: UIViewController {
         configureTopPlayerLabel()
         configureBottomPlayerLabel()
         
-        configureMovesCounter(moveLabel: movesCounterFirstPlayer, playerLabel: topPlayerLabel)
-        configureMovesCounter(moveLabel: movesCounterSecondPlayer, playerLabel: bottomPlayerLabel)
+//        configureMovesCounter(moveLabel: movesCounterFirstPlayer, playerLabel: topPlayerLabel)
+//        configureMovesCounter(moveLabel: movesCounterSecondPlayer, playerLabel: bottomPlayerLabel)
         
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
@@ -97,9 +97,9 @@ class MainViewController: UIViewController {
     
     private func configureTopPlayerLabel() {
         view.addSubview(topPlayerLabel)
-        presenter.getTime()
+        presenter.getTimeTopPlayer()
         topPlayerLabel.isUserInteractionEnabled = true
-        topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
+        topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
         
         topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
         topPlayerLabel.textAlignment = .center
@@ -111,9 +111,9 @@ class MainViewController: UIViewController {
     
     private func configureBottomPlayerLabel() {
         view.addSubview(bottomPlayerLabel)
-        presenter.getTime()
+        presenter.getTimeBottomPlayer()
         bottomPlayerLabel.isUserInteractionEnabled = true
-        bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionPlayerLabel)))
+        bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
         
         bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
         bottomPlayerLabel.textAlignment = .center
@@ -243,16 +243,27 @@ class MainViewController: UIViewController {
         
     }
     
-    @objc func tapActionPlayerLabel() {
-        print("tap player label")
-        presenter.startTimer()
+//    @objc func tapActionPlayerLabel() {
+//        print("tap player label")
+//        presenter.startTimer()
+//    }
+    
+    @objc func tapActionTopPlayerLabel() {
+        print("tap top player label")
+        presenter.startTimerTopPlayer()
+    }
+    @objc func tapActionBottomPlayerLabel() {
+        print("tap bottom player label")
+        presenter.startTimerBottomPlayer()
     }
 }
 
 extension MainViewController: MainViewProtocol {
-    func setTime(time: String) {
-        self.topPlayerLabel.text = time
-        self.bottomPlayerLabel.text = time
+    func setTimeTopPlayer(timeTopPlayer: String) {
+        topPlayerLabel.text = timeTopPlayer
+    }
+    func setTimeBottomPlayer(timeBottomPlayer: String) {
+        bottomPlayerLabel.text = timeBottomPlayer
     }
     
     func setMoveNumber(moveNumber: Int) {

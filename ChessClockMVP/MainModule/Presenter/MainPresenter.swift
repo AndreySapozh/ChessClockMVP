@@ -7,34 +7,43 @@
 import Foundation
 
 protocol MainViewProtocol: AnyObject {
-    func setTime(time: String)
+    func setTimeTopPlayer(timeTopPlayer: String)
+    func setTimeBottomPlayer(timeBottomPlayer: String)
     func setMoveNumber(moveNumber: Int)
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, router: RouterProtocol, timer: Timer)
+    init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer)
     
     func showMoveNumber()
     func tapSettingsButton()
-    func getTime()
+    func getTimeTopPlayer()
+    func getTimeBottomPlayer()
     func tapPauseButton()
     func tapResetButton()
-    func startTimer()
+//    func startTimer()
+    func startTimerTopPlayer()
+    func startTimerBottomPlayer()
+    
 }
 
 final class MainPresenter: MainViewPresenterProtocol {
     
     weak var view: MainViewProtocol?
     var router: RouterProtocol?
-    var timeChess: Int
-    var timer: Timer
+    var timeChessTopPlayer: Int
+    var timeChessBottomPlayer: Int
+    var timerTopPlayer: Timer
+    var timerBottomPlayer: Timer
 
-    required init(view: MainViewProtocol, router: RouterProtocol, timer: Timer) {
+    required init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer) {
         self.view = view
         self.router = router
 //        getTime()
-        timeChess = presets.first?.seconds ?? 60
-        self.timer = timer
+        self.timeChessTopPlayer = presets.first?.seconds ?? 1
+        self.timeChessBottomPlayer = presets.first?.seconds ?? 10
+        self.timerTopPlayer = timerTopPlayer
+        self.timerBottomPlayer = timerBottomPlayer
         
     }
 //    func getTime() {
@@ -44,10 +53,16 @@ final class MainPresenter: MainViewPresenterProtocol {
         router?.showSettings()
     }
     
-    func getTime() {
+    func getTimeTopPlayer() {
         guard let timeInInt = presets.first?.seconds else { return }
         let timeInString = makeTime(time: timeInInt)
-        self.view?.setTime(time: timeInString)
+        self.view?.setTimeTopPlayer(timeTopPlayer: timeInString)
+    }
+    
+    func getTimeBottomPlayer() {
+        guard let timeInInt = presets.first?.seconds else { return }
+        let timeInString = makeTime(time: timeInInt)
+        self.view?.setTimeBottomPlayer(timeBottomPlayer: timeInString)
     }
     
     
@@ -58,6 +73,8 @@ final class MainPresenter: MainViewPresenterProtocol {
     
     func tapPauseButton() {
         // tapped pause button logic
+        timerTopPlayer.invalidate()
+        timerBottomPlayer.invalidate()
     }
     
     func tapResetButton() {
@@ -91,15 +108,47 @@ final class MainPresenter: MainViewPresenterProtocol {
         return timeString
     }
     
-    @objc func timerCounter() -> Void {
-        timeChess -= 1
-        let time = secondsToHoursToMinutesToSeconds(seconds: timeChess)
+//    @objc func timerCounter() -> Void {
+//        timeChess -= 1
+//        let time = secondsToHoursToMinutesToSeconds(seconds: timeChess)
+//        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+//        self.view?.setTime(time: timeString)
+//    }
+    
+    @objc func timerCounterTopPlayer() -> Void {
+        timeChessTopPlayer -= 1
+        let timeTopPlayer = secondsToHoursToMinutesToSeconds(seconds: timeChessTopPlayer)
+        let timeStringTopPlayer = makeTimeString(hours: timeTopPlayer.0, minutes: timeTopPlayer.1, seconds: timeTopPlayer.2)
+        view?.setTimeTopPlayer(timeTopPlayer: timeStringTopPlayer)
+//        view?.setTime(time: timeStringTopPlayer)
+    }
+    @objc func timerCounterBottomPlayer() -> Void {
+        timeChessBottomPlayer -= 1
+        let time = secondsToHoursToMinutesToSeconds(seconds: timeChessBottomPlayer)
         let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
-        self.view?.setTime(time: timeString)
-//        TimerLabel.text = timeString
+        view?.setTimeBottomPlayer(timeBottomPlayer: timeString)
+//        view?.setTime(time: timeString)
     }
     
-    func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+//    func startTimer() {
+//        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+//    }
+    func startTimerTopPlayer() {
+//        timerBottomPlayer.invalidate()
+        timerBottomPlayer = Timer.scheduledTimer(timeInterval: 1,
+                                              target: self,
+                                              selector: #selector(timerCounterBottomPlayer),
+                                              userInfo: nil,
+                                              repeats: true)
+        timerTopPlayer.invalidate()
+
+    }
+    func startTimerBottomPlayer() {
+        timerTopPlayer = Timer.scheduledTimer(timeInterval: 1,
+                                              target: self,
+                                              selector: #selector(timerCounterTopPlayer),
+                                              userInfo: nil,
+                                              repeats: true)
+        timerBottomPlayer.invalidate()
     }
 }
