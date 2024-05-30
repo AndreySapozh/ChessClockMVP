@@ -21,7 +21,6 @@ protocol MainViewPresenterProtocol: AnyObject {
     func getTimeBottomPlayer()
     func tapPauseButton()
     func tapResetButton()
-//    func startTimer()
     func startTimerTopPlayer()
     func startTimerBottomPlayer()
     
@@ -108,33 +107,21 @@ final class MainPresenter: MainViewPresenterProtocol {
         return timeString
     }
     
-//    @objc func timerCounter() -> Void {
-//        timeChess -= 1
-//        let time = secondsToHoursToMinutesToSeconds(seconds: timeChess)
-//        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
-//        self.view?.setTime(time: timeString)
-//    }
-    
     @objc func timerCounterTopPlayer() -> Void {
         timeChessTopPlayer -= 1
         let timeTopPlayer = secondsToHoursToMinutesToSeconds(seconds: timeChessTopPlayer)
         let timeStringTopPlayer = makeTimeString(hours: timeTopPlayer.0, minutes: timeTopPlayer.1, seconds: timeTopPlayer.2)
         view?.setTimeTopPlayer(timeTopPlayer: timeStringTopPlayer)
-//        view?.setTime(time: timeStringTopPlayer)
     }
     @objc func timerCounterBottomPlayer() -> Void {
         timeChessBottomPlayer -= 1
         let time = secondsToHoursToMinutesToSeconds(seconds: timeChessBottomPlayer)
         let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
         view?.setTimeBottomPlayer(timeBottomPlayer: timeString)
-//        view?.setTime(time: timeString)
     }
     
-//    func startTimer() {
-//        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
-//    }
+
     func startTimerTopPlayer() {
-//        timerBottomPlayer.invalidate()
         timerBottomPlayer = Timer.scheduledTimer(timeInterval: 1,
                                               target: self,
                                               selector: #selector(timerCounterBottomPlayer),
@@ -144,10 +131,10 @@ final class MainPresenter: MainViewPresenterProtocol {
 
     }
     func startTimerBottomPlayer() {
-        timerTopPlayer = Timer.scheduledTimer(timeInterval: 1,
+        timerTopPlayer = Timer.scheduledTimer(timeInterval: 1, 
                                               target: self,
                                               selector: #selector(timerCounterTopPlayer),
-                                              userInfo: nil,
+                                              userInfo: nil, 
                                               repeats: true)
         timerBottomPlayer.invalidate()
     }

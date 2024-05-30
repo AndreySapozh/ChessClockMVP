@@ -101,7 +101,7 @@ class MainViewController: UIViewController {
         topPlayerLabel.isUserInteractionEnabled = true
         topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
         
-        topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
         topPlayerLabel.textAlignment = .center
         topPlayerLabel.font = UIFont.mainTimePlayers
         topPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -114,8 +114,7 @@ class MainViewController: UIViewController {
         presenter.getTimeBottomPlayer()
         bottomPlayerLabel.isUserInteractionEnabled = true
         bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
-        
-        bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
         bottomPlayerLabel.textAlignment = .center
         bottomPlayerLabel.font = UIFont.mainTimePlayers
         bottomPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -243,18 +242,34 @@ class MainViewController: UIViewController {
         
     }
     
-//    @objc func tapActionPlayerLabel() {
-//        print("tap player label")
-//        presenter.startTimer()
-//    }
-    
     @objc func tapActionTopPlayerLabel() {
-        print("tap top player label")
-        presenter.startTimerTopPlayer()
+        if topPlayerLabel.isUserInteractionEnabled == bottomPlayerLabel.isUserInteractionEnabled {
+            presenter.startTimerTopPlayer()
+            topPlayerLabel.isUserInteractionEnabled.toggle()
+            topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
+            bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        }
+        else   {
+            presenter.startTimerTopPlayer()
+            topPlayerLabel.isUserInteractionEnabled.toggle()
+            topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
+            bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+            bottomPlayerLabel.isUserInteractionEnabled.toggle()
+        }
     }
     @objc func tapActionBottomPlayerLabel() {
-        print("tap bottom player label")
-        presenter.startTimerBottomPlayer()
+        if topPlayerLabel.isUserInteractionEnabled == bottomPlayerLabel.isUserInteractionEnabled {
+            presenter.startTimerBottomPlayer()
+            bottomPlayerLabel.isUserInteractionEnabled.toggle()
+            bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
+            topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+        } else {
+            presenter.startTimerBottomPlayer()
+            bottomPlayerLabel.isUserInteractionEnabled.toggle()
+            bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
+            topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+            topPlayerLabel.isUserInteractionEnabled.toggle()
+        }
     }
 }
 
