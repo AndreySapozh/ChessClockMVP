@@ -56,7 +56,7 @@ struct Time {
 }
 
 var presets: [Time] = [
-    Time(seconds: 60),
+    Time(seconds: 10),
     Time(seconds: 180),
     Time(seconds: 300),
     Time(seconds: 600),
