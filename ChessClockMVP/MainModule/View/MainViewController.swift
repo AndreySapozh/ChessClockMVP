@@ -16,11 +16,11 @@ class MainViewController: UIViewController {
     private let settingsButton = UIButton()
     private let pauseButton = UIButton()
     private let resetButton = UIButton()
-    private let movesCounterFirstPlayer = UILabel()
-    private let movesCounterSecondPlayer = UILabel()
+    private let movesCounterTopPlayer = UILabel()
+    private let movesCounterBottomPlayer = UILabel()
     
-    var moveNumberFirstPlayer: Int = 0
-    var moveNumberSecondPlayer: Int = 0
+//    var moveNumberFirstPlayer: Int = 0
+//    var moveNumberSecondPlayer: Int = 0
     private let heightWidthButton: CGFloat = 40
     private let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
@@ -39,6 +39,8 @@ class MainViewController: UIViewController {
         configureTopPlayerLabel()
         configureBottomPlayerLabel()
         
+        configureMovesCounter(moveLabel: movesCounterTopPlayer, playerLabel: topPlayerLabel)
+        configureMovesCounter(moveLabel: movesCounterBottomPlayer, playerLabel: bottomPlayerLabel)
         
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
@@ -70,6 +72,7 @@ class MainViewController: UIViewController {
             self.presenter.tapResetButton()
             self.topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
             self.bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
+
             self.playersLabelIsUserInteractionEnabledTrue()
 
         }))
@@ -109,9 +112,10 @@ class MainViewController: UIViewController {
     
     
     private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel) {
-        self.presenter.showMoveNumber()
+        self.presenter.showMoveNumberTopPlayer()
+        self.presenter.showMoveNumberBottomPlayer()
         
-        moveLabel.backgroundColor = UIColor.paleGreenLabel
+        moveLabel.backgroundColor = UIColor(white: 1, alpha: 0)
         moveLabel.font = UIFont.counterMoves
         
         movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
@@ -260,9 +264,11 @@ extension MainViewController: MainViewProtocol {
         bottomPlayerLabel.text = timeBottomPlayer
     }
     
-    func setMoveNumber(moveNumber: Int) {
-        self.movesCounterFirstPlayer.text = ("Moves: \(moveNumber)")
-        self.movesCounterSecondPlayer.text = ("Moves: \(moveNumber)")
+    func setMoveNumberTopPlayer(moveNumber: Int) {
+        self.movesCounterTopPlayer.text = ("Moves: \(moveNumber)")
+    }
+    func setMoveNumberBottomPlayer(moveNumber: Int) {
+        self.movesCounterBottomPlayer.text = ("Moves: \(moveNumber)")
     }
     func setRedColorWhenTheEndTimeTopPlayer() {
         topPlayerLabel.backgroundColor = UIColor.redColorTheEndTime

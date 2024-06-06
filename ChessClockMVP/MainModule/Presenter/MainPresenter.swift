@@ -11,13 +11,15 @@ protocol MainViewProtocol: AnyObject {
     func setTimeBottomPlayer(timeBottomPlayer: String)
     func setRedColorWhenTheEndTimeTopPlayer()
     func setRedColorWhenTheEndTimeBottomPlayer()
-    func setMoveNumber(moveNumber: Int)
+    func setMoveNumberTopPlayer(moveNumber: Int)
+    func setMoveNumberBottomPlayer(moveNumber: Int)
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer)
     
-    func showMoveNumber()
+    func showMoveNumberTopPlayer()
+    func showMoveNumberBottomPlayer()
     func tapSettingsButton()
     func getTimeTopPlayer()
     func getTimeBottomPlayer()
@@ -30,6 +32,8 @@ protocol MainViewPresenterProtocol: AnyObject {
     func updateToStartTime()
     func theEndTimeTopPlayer()
     func theEndTimeBottomPlayer()
+    func moveCounterBottomPlayer()
+    func moveCounterTopPlayer()
     
 }
 
@@ -41,6 +45,8 @@ final class MainPresenter: MainViewPresenterProtocol {
     var timeChessBottomPlayer: Int
     var timerTopPlayer: Timer
     var timerBottomPlayer: Timer
+    var moveTopPlayer: Int
+    var moveBottomPlayer: Int
     
     required init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer) {
         self.view = view
@@ -49,6 +55,8 @@ final class MainPresenter: MainViewPresenterProtocol {
         self.timeChessBottomPlayer = presets.first?.seconds ?? 10
         self.timerTopPlayer = timerTopPlayer
         self.timerBottomPlayer = timerBottomPlayer
+        self.moveTopPlayer = 0
+        self.moveBottomPlayer = 0
     }
     
     func tapSettingsButton() {
@@ -67,10 +75,12 @@ final class MainPresenter: MainViewPresenterProtocol {
         self.view?.setTimeBottomPlayer(timeBottomPlayer: timeInString)
     }
     
+    func showMoveNumberTopPlayer() {
+        self.view?.setMoveNumberTopPlayer(moveNumber: moveTopPlayer)
+    }
     
-    func showMoveNumber() {
-        let moveNumber = 0
-        self.view?.setMoveNumber(moveNumber: moveNumber)
+    func showMoveNumberBottomPlayer() {
+        self.view?.setMoveNumberBottomPlayer(moveNumber: moveBottomPlayer)
     }
     
     func tapPauseButton() {
@@ -79,11 +89,13 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func tapResetButton() {
-        stopTimerTopPlayer()
-        stopTimerBottomPlayer()
+//        stopTimerTopPlayer()
+//        stopTimerBottomPlayer()
+        updateToStartTime()
         getTimeTopPlayer()
         getTimeBottomPlayer()
-        updateToStartTime()
+        showMoveNumberTopPlayer()
+        showMoveNumberBottomPlayer()
     }
     
     func secondsToHoursToMinutesToSeconds(seconds: Int) -> (Int, Int, Int) {
@@ -136,7 +148,7 @@ final class MainPresenter: MainViewPresenterProtocol {
                                                  userInfo: nil,
                                                  repeats: true)
         stopTimerTopPlayer()
-        
+        moveCounterTopPlayer()
     }
     func tapBottomPlayerLabel() {
         timerTopPlayer = Timer.scheduledTimer(timeInterval: 1,
@@ -145,6 +157,7 @@ final class MainPresenter: MainViewPresenterProtocol {
                                               userInfo: nil,
                                               repeats: true)
         stopTimerBottomPlayer()
+        moveCounterBottomPlayer()
     }
     
     func theEndTimeTopPlayer() {
@@ -170,6 +183,17 @@ final class MainPresenter: MainViewPresenterProtocol {
     func updateToStartTime() {
         timeChessTopPlayer = presets.first?.seconds ?? 1
         timeChessBottomPlayer = presets.first?.seconds ?? 10
+        moveTopPlayer = 0
+        moveBottomPlayer = 0
     }
+    func moveCounterBottomPlayer() {
+        moveBottomPlayer += 1
+        showMoveNumberBottomPlayer()
+    }
+    func moveCounterTopPlayer() {
+        moveTopPlayer += 1
+        showMoveNumberTopPlayer()
+    }
+    
 }
 
