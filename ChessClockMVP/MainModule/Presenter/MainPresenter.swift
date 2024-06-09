@@ -29,7 +29,7 @@ protocol MainViewPresenterProtocol: AnyObject {
     func tapTopPlayerLabel()
     func stopTimerTopPlayer()
     func stopTimerBottomPlayer()
-    func updateToStartTime()
+    func updateToStartTimeAndMove()
     func theEndTimeTopPlayer()
     func theEndTimeBottomPlayer()
     func moveCounterBottomPlayer()
@@ -89,9 +89,7 @@ final class MainPresenter: MainViewPresenterProtocol {
     }
     
     func tapResetButton() {
-//        stopTimerTopPlayer()
-//        stopTimerBottomPlayer()
-        updateToStartTime()
+        updateToStartTimeAndMove()
         getTimeTopPlayer()
         getTimeBottomPlayer()
         showMoveNumberTopPlayer()
@@ -180,7 +178,7 @@ final class MainPresenter: MainViewPresenterProtocol {
     func stopTimerBottomPlayer() {
         timerBottomPlayer.invalidate()
     }
-    func updateToStartTime() {
+    func updateToStartTimeAndMove() {
         timeChessTopPlayer = presets.first?.seconds ?? 1
         timeChessBottomPlayer = presets.first?.seconds ?? 10
         moveTopPlayer = 0

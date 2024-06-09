@@ -18,9 +18,6 @@ class MainViewController: UIViewController {
     private let resetButton = UIButton()
     private let movesCounterTopPlayer = UILabel()
     private let movesCounterBottomPlayer = UILabel()
-    
-//    var moveNumberFirstPlayer: Int = 0
-//    var moveNumberSecondPlayer: Int = 0
     private let heightWidthButton: CGFloat = 40
     private let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
@@ -93,7 +90,7 @@ class MainViewController: UIViewController {
         topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
         topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
         topPlayerLabel.textAlignment = .center
-        topPlayerLabel.font = UIFont.mainTimePlayers
+        topPlayerLabel.font = UIFont.mainTimePlayersFont
 
         createTopPlayerConstraint()
     }
@@ -105,7 +102,7 @@ class MainViewController: UIViewController {
         bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
         bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
         bottomPlayerLabel.textAlignment = .center
-        bottomPlayerLabel.font = UIFont.mainTimePlayers
+        bottomPlayerLabel.font = UIFont.mainTimePlayersFont
 
         createBottomPlayerConstraint()
     }
@@ -116,7 +113,7 @@ class MainViewController: UIViewController {
         self.presenter.showMoveNumberBottomPlayer()
         
         moveLabel.backgroundColor = UIColor(white: 1, alpha: 0)
-        moveLabel.font = UIFont.counterMoves
+        moveLabel.font = UIFont.counterMovesFont
         
         movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
         

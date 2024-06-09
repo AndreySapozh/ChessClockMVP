@@ -155,7 +155,7 @@ final class NewTimeViewController: UIViewController {
         label.text = "0:00"
         label.textAlignment = .center
         label.backgroundColor = UIColor.greenLabel
-        label.font = UIFont.setupTimeLabel
+        label.font = UIFont.setupTimeLabelFont
         setTimeAndIncrementLabelConstraint(label: label)
     }
     
