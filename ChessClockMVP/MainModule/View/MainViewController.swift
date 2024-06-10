@@ -16,8 +16,8 @@ class MainViewController: UIViewController {
     private let settingsButton = UIButton()
     private let pauseButton = UIButton()
     private let resetButton = UIButton()
-    private let movesCounterTopPlayer = UILabel()
-    private let movesCounterBottomPlayer = UILabel()
+    private let moveCounterTopPlayer = UILabel()
+    private let moveCounterBottomPlayer = UILabel()
     private let heightWidthButton: CGFloat = 40
     private let buttonCenterXConstrait: CGFloat = 80
     private let topBottomConstrait: CGFloat = 0
@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteView
+        view.backgroundColor = .whiteView
         
         setupNavigationController()
         configureButton(button: settingsButton)
@@ -36,13 +36,65 @@ class MainViewController: UIViewController {
         configureTopPlayerLabel()
         configureBottomPlayerLabel()
         
-        configureMovesCounter(moveLabel: movesCounterTopPlayer, playerLabel: topPlayerLabel)
-        configureMovesCounter(moveLabel: movesCounterBottomPlayer, playerLabel: bottomPlayerLabel)
+        configureMoveCounter(moveLabel: moveCounterTopPlayer, playerLabel: topPlayerLabel)
+        configureMoveCounter(moveLabel: moveCounterBottomPlayer, playerLabel: bottomPlayerLabel)
         
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
         pauseButton.addTarget(self, action: #selector(didTapPauseButton), for: .touchUpInside)
+    }
+    
+    private func setupNavigationController() {
+        navigationController?.navigationBar.tintColor = .black
+        let backItem = UIBarButtonItem()
+        backItem.title = "Clock"
+        navigationItem.backBarButtonItem = backItem
+    }
+    private func configureButton(button: UIButton) {
+        view.addSubview(button)
+        button.backgroundColor = .blueButton
+        button.translatesAutoresizingMaskIntoConstraints = false
         
+        switch button {
+        case settingsButton:
+            button.setTitle("Set", for: .normal)
+        case pauseButton:
+            pauseButton.setTitle("Pau", for: .normal)
+        case resetButton:
+            resetButton.setTitle("Res", for: .normal)
+        default:
+            return
+        }
+        createButtonConstraint(button: button)
+    }
+    
+    private func configureTopPlayerLabel() {
+        presenter.getTimeTopPlayer()
+        view.addSubview(topPlayerLabel)
+        topPlayerLabel.backgroundColor = .lightGrayLabel
+        topPlayerLabel.textAlignment = .center
+        topPlayerLabel.font = .mainTimePlayersFont
+        topPlayerLabel.isUserInteractionEnabled = true
+        topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
+        createTopPlayerConstraint()
+    }
+    private func configureBottomPlayerLabel() {
+        presenter.getTimeBottomPlayer()
+        view.addSubview(bottomPlayerLabel)
+        bottomPlayerLabel.backgroundColor = .lightGrayLabel
+        bottomPlayerLabel.textAlignment = .center
+        bottomPlayerLabel.font = .mainTimePlayersFont
+        bottomPlayerLabel.isUserInteractionEnabled = true
+        bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
+        createBottomPlayerConstraint()
+    }
+    
+    private func configureMoveCounter(moveLabel: UILabel, playerLabel: UILabel) {
+        presenter.showMoveNumberTopPlayer()
+        presenter.showMoveNumberBottomPlayer()
+        moveLabel.backgroundColor = .trasparentMoveLabel
+        moveLabel.font = .counterMovesFont
+        movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
     }
     
     @objc private func didTapSettingsButton() {
@@ -67,76 +119,30 @@ class MainViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
             //            update chess time
             self.presenter.tapResetButton()
-            self.topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-            self.bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-
+            self.topPlayerLabel.backgroundColor = .lightGrayLabel
+            self.bottomPlayerLabel.backgroundColor = .lightGrayLabel
             self.playersLabelIsUserInteractionEnabledTrue()
-
         }))
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func setupNavigationController() {
-        navigationController?.navigationBar.tintColor = .black
-        let backItem = UIBarButtonItem()
-        backItem.title = "Clock"
-        navigationItem.backBarButtonItem = backItem
-    }
-    
-    private func configureTopPlayerLabel() {
-        view.addSubview(topPlayerLabel)
-        presenter.getTimeTopPlayer()
-        topPlayerLabel.isUserInteractionEnabled = true
-        topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
-        topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-        topPlayerLabel.textAlignment = .center
-        topPlayerLabel.font = UIFont.mainTimePlayersFont
-
-        createTopPlayerConstraint()
-    }
-    
-    private func configureBottomPlayerLabel() {
-        view.addSubview(bottomPlayerLabel)
-        presenter.getTimeBottomPlayer()
-        bottomPlayerLabel.isUserInteractionEnabled = true
-        bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
-        bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-        bottomPlayerLabel.textAlignment = .center
-        bottomPlayerLabel.font = UIFont.mainTimePlayersFont
-
-        createBottomPlayerConstraint()
-    }
-    
-    
-    private func configureMovesCounter(moveLabel: UILabel, playerLabel: UILabel) {
-        self.presenter.showMoveNumberTopPlayer()
-        self.presenter.showMoveNumberBottomPlayer()
-        
-        moveLabel.backgroundColor = UIColor(white: 1, alpha: 0)
-        moveLabel.font = UIFont.counterMovesFont
-        
-        movesCounterConstraint(moveLabel: moveLabel, playerLabel: playerLabel)
-        
-    }
-    
-    private func configureButton(button: UIButton) {
-        
-        view.addSubview(button)
-        button.backgroundColor = UIColor.blueButton
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+    private func createButtonConstraint(button: UIButton) {
+        button.layer.cornerRadius = 3
+        NSLayoutConstraint.activate([
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+            button.widthAnchor.constraint(equalToConstant: heightWidthButton),
+            button.heightAnchor.constraint(equalToConstant: heightWidthButton)
+        ])
         switch button {
         case settingsButton:
-            button.setTitle("Set", for: .normal)
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -buttonCenterXConstrait).isActive = true
         case pauseButton:
-            pauseButton.setTitle("Pau", for: .normal)
+            pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         case resetButton:
-            resetButton.setTitle("Res", for: .normal)
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonCenterXConstrait).isActive = true
         default:
             return
         }
-        
-        createButtonConstraint(button: button)
     }
     
     private func createTopPlayerConstraint() {
@@ -163,40 +169,16 @@ class MainViewController: UIViewController {
             bottomPlayerLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: topBottomConstrait)
         ])
     }
-    
-    
-    private func createButtonConstraint(button: UIButton) {
-        button.layer.cornerRadius = 3
-        NSLayoutConstraint.activate([
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-            button.widthAnchor.constraint(equalToConstant: heightWidthButton),
-            button.heightAnchor.constraint(equalToConstant: heightWidthButton)
-        ])
-        switch button {
-        case settingsButton:
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -buttonCenterXConstrait).isActive = true
-        case pauseButton:
-            pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        case resetButton:
-            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonCenterXConstrait).isActive = true
-        default:
-            return
-        }
-    }
-    
+
     private func movesCounterConstraint(moveLabel: UILabel, playerLabel: UILabel) {
-        
-        
         playerLabel.addSubview(moveLabel)
         moveLabel.layer.masksToBounds = true
         moveLabel.layer.cornerRadius = 8
-        
         moveLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             moveLabel.heightAnchor.constraint(equalToConstant: heightWidthButton * 0.75),
             moveLabel.widthAnchor.constraint(equalToConstant: heightWidthButton * 2)
         ])
-        
         switch playerLabel {
         case topPlayerLabel:
             NSLayoutConstraint.activate([
@@ -211,21 +193,19 @@ class MainViewController: UIViewController {
         default:
             return
         }
-        
     }
     
     @objc func tapActionTopPlayerLabel() {
         if topPlayerLabel.isUserInteractionEnabled == bottomPlayerLabel.isUserInteractionEnabled {
             presenter.tapTopPlayerLabel()
             topPlayerLabel.isUserInteractionEnabled.toggle()
-            topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-            bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
-        }
-        else   {
+            topPlayerLabel.backgroundColor = .lightGrayLabel
+            bottomPlayerLabel.backgroundColor = .paleGreenLabel
+        } else {
             presenter.tapTopPlayerLabel()
             topPlayerLabel.isUserInteractionEnabled.toggle()
-            topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-            bottomPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+            topPlayerLabel.backgroundColor = .lightGrayLabel
+            bottomPlayerLabel.backgroundColor = .paleGreenLabel
             bottomPlayerLabel.isUserInteractionEnabled.toggle()
         }
     }
@@ -233,13 +213,13 @@ class MainViewController: UIViewController {
         if topPlayerLabel.isUserInteractionEnabled == bottomPlayerLabel.isUserInteractionEnabled {
             presenter.tapBottomPlayerLabel()
             bottomPlayerLabel.isUserInteractionEnabled.toggle()
-            bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-            topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+            bottomPlayerLabel.backgroundColor = .lightGrayLabel
+            topPlayerLabel.backgroundColor = .paleGreenLabel
         } else {
             presenter.tapBottomPlayerLabel()
             bottomPlayerLabel.isUserInteractionEnabled.toggle()
-            bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-            topPlayerLabel.backgroundColor = UIColor.paleGreenLabel
+            bottomPlayerLabel.backgroundColor = .lightGrayLabel
+            topPlayerLabel.backgroundColor = .paleGreenLabel
             topPlayerLabel.isUserInteractionEnabled.toggle()
         }
     }
@@ -248,9 +228,7 @@ class MainViewController: UIViewController {
         topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionTopPlayerLabel)))
         bottomPlayerLabel.isUserInteractionEnabled = true
         bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActionBottomPlayerLabel)))
-
     }
-    
 }
 
 extension MainViewController: MainViewProtocol {
@@ -262,20 +240,20 @@ extension MainViewController: MainViewProtocol {
     }
     
     func setMoveNumberTopPlayer(moveNumber: Int) {
-        self.movesCounterTopPlayer.text = ("Moves: \(moveNumber)")
+        moveCounterTopPlayer.text = ("Moves: \(moveNumber)")
     }
     func setMoveNumberBottomPlayer(moveNumber: Int) {
-        self.movesCounterBottomPlayer.text = ("Moves: \(moveNumber)")
+        self.moveCounterBottomPlayer.text = ("Moves: \(moveNumber)")
     }
     func setRedColorWhenTheEndTimeTopPlayer() {
-        topPlayerLabel.backgroundColor = UIColor.redColorTheEndTime
+        topPlayerLabel.backgroundColor = .redColorTheEndTime
         topPlayerLabel.isUserInteractionEnabled = true
         topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapResetButton)))
         bottomPlayerLabel.isUserInteractionEnabled = true
         bottomPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapResetButton)))
     }
     func setRedColorWhenTheEndTimeBottomPlayer() {
-        bottomPlayerLabel.backgroundColor = UIColor.redColorTheEndTime
+        bottomPlayerLabel.backgroundColor = .redColorTheEndTime
         topPlayerLabel.isUserInteractionEnabled = true
         topPlayerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapResetButton)))
         bottomPlayerLabel.isUserInteractionEnabled = true

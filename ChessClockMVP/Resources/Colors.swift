@@ -15,5 +15,6 @@ extension UIColor {
     static let greenLabel = UIColor(red: 120/255, green: 249/255, blue: 0/255, alpha: 1.0)
     static let lightGrayLabel = UIColor.lightGray
     static let redColorTheEndTime = UIColor.red
+    static let trasparentMoveLabel = UIColor(white: 1, alpha: 0)
 
 }

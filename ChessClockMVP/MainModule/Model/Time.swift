@@ -9,13 +9,8 @@ import Foundation
 
 struct Time {
     var seconds: Int
-//    var name: String {
-//        get {
-//            return String(seconds) + " seconds"
-//        }
     var name: String {
         get {
-            
             makeTime(time: seconds)
         }
     }
@@ -56,7 +51,7 @@ struct Time {
 }
 
 var presets: [Time] = [
-    Time(seconds: 30),
+    Time(seconds: 20),
     Time(seconds: 180),
     Time(seconds: 300),
     Time(seconds: 600),
