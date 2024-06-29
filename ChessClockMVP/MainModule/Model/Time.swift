@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import RealmSwift
+
+class TimeExample: Object {
+    @objc dynamic var seconds = ""
+    @objc dynamic var name = ""
+}
 
 struct Time {
     var seconds: Int
+//    var increment: Int
     var name: String {
         get {
             makeTime(time: seconds)
