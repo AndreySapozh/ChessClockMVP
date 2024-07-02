@@ -15,9 +15,7 @@ final class SettingsViewController: UIViewController {
     private var tableView = UITableView()
     
     private let heightCell: CGFloat = 50
-    
-    private let timeChess: [Time] = presets
-    
+        
     struct Cells {
         static let textCell = "textCell"
     }
@@ -52,11 +50,13 @@ final class SettingsViewController: UIViewController {
     
     @objc private func moveDeleteRows() {
         // to correct on move and delete rows
-        presenter.tapStartButton()
+//        presenter.tapStartButton()
+//        presenter.tapStartButton(time: presets.first!)
     }
     
     @objc private func didTapStartButton() {
-        presenter.tapStartButton()
+        guard let indexPath = tableView.indexPathForSelectedRow?.row else { return }
+        presenter.tapStartButton(time: presenter.time[indexPath])
     }
     
     @objc private func didTapCustomTimeButton() {
@@ -126,22 +126,17 @@ final class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    
 }
 
 extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeChess.count
-        //        presenter.timeChess.count ?? 0
+        return presenter.time.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.textCell) as! TimeTableViewCell
-        //        let object = chessTimeOptions[indexPath.row]
-        //        cell.set(object: object)
-        let objectTimeChess = timeChess[indexPath.row]
+        let objectTimeChess = presenter.time[indexPath.row]
         cell.set(object: objectTimeChess)
         return cell
     }
@@ -151,8 +146,9 @@ extension SettingsViewController: UITableViewDataSource {
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //            let timeChess = presenter.timeChess[indexPath.row]
-        //            presenter.selectedTimeChess(timeChess: timeChess)
+        let indexPath = indexPath.row
+        let time = presenter.time[indexPath]
+//        presenter.tapStartButton(time: time)
     }
 }
 

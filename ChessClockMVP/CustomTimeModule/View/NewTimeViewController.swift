@@ -311,7 +311,6 @@ final class NewTimeViewController: UIViewController {
 }
 
 extension NewTimeViewController: NewTimeViewProtocol {
-//    func createTimeChess(newTimeChess: NewTime) {
     func createTimeChess(newTimeChess: Time) {
         print(newTimeChess)
     }

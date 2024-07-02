@@ -8,35 +8,26 @@
 import Foundation
 
 protocol NewTimeViewProtocol: AnyObject {
-    func createTimeChess(newTimeChess: Time)
 
 }
 
 protocol NewTimeViewPresenterProtocol: AnyObject {
-    init(view: NewTimeViewProtocol, newTimeChess: Time, router: RouterProtocol)
-    func createTime()
-    func tapSaveButton()
+    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: Time)
+    func tapSaveButton(newChessTime: Time)
 }
 
 final class NewTimePresenter: NewTimeViewPresenterProtocol {
-    
     weak var view: NewTimeViewProtocol?
     var newTimeChess: Time
-    
     var router: RouterProtocol?
     
-    required init(view: NewTimeViewProtocol, newTimeChess: Time, router: RouterProtocol) {
+    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: Time) {
         self.view = view
         self.newTimeChess = newTimeChess
         self.router = router
     }
-    
-    public func createTime() {
-        self.view?.createTimeChess(newTimeChess: newTimeChess)
-    }
-    
-    func tapSaveButton() {
-        router?.popToRoot(time: Time(seconds: 60))
+    func tapSaveButton(newChessTime: Time) {
+//        router?.popToRoot(time: newTimeChess)
     }
    
     
