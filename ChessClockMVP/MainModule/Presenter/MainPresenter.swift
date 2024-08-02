@@ -16,7 +16,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer, timeChess: Time)
+    init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer, timeChess: TimeRealm)
     
     func showMoveNumberTopPlayer()
     func showMoveNumberBottomPlayer()
@@ -34,6 +34,7 @@ protocol MainViewPresenterProtocol: AnyObject {
     func theEndTimeBottomPlayer()
     func moveCounterBottomPlayer()
     func moveCounterTopPlayer()
+    func saveDefaultTimeControls()
     
 }
 
@@ -43,13 +44,14 @@ final class MainPresenter: MainViewPresenterProtocol {
     var router: RouterProtocol?
     var timeChessTopPlayer: Float
     var timeChessBottomPlayer: Float
+    let timeIncrement: Float
     var timerTopPlayer: Timer
     var timerBottomPlayer: Timer
     var moveTopPlayer: Int
     var moveBottomPlayer: Int
-    var timeChess: Time
+    var timeChess: TimeRealm
     
-    required init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer, timeChess: Time) {
+    required init(view: MainViewProtocol, router: RouterProtocol, timerTopPlayer: Timer, timerBottomPlayer: Timer, timeChess: TimeRealm) {
         self.view = view
         self.router = router
         self.timerTopPlayer = timerTopPlayer
@@ -58,12 +60,16 @@ final class MainPresenter: MainViewPresenterProtocol {
         self.moveBottomPlayer = 0
         self.timeChess = timeChess
 //        TODO: make the right logic
-//        self.timeChessTopPlayer = Float(presets.first?.seconds ?? 1)
         self.timeChessTopPlayer = Float(timeChess.seconds)
-//        self.timeChessBottomPlayer = Float(presets.first?.seconds ?? 10)
         self.timeChessBottomPlayer = Float(timeChess.seconds)
-
+        self.timeIncrement = Float(timeChess.increment)
     }
+// MARK: - add default time in storage manager
+    func saveDefaultTimeControls() {
+        StorageManager.shared.save(chessTimeArray: presetsRealm)
+    }
+    
+    
 // MARK: - tap buttons
     func tapSettingsButton() {
         router?.showSettings(timeChess: timeChess)
@@ -84,7 +90,6 @@ final class MainPresenter: MainViewPresenterProtocol {
 //  MARK: - get and show time
     func getTimeTopPlayer() {
 //       TODO: make the right logic
-//        guard let timeInInt = presets.first?.seconds else { return }
         let timeInInt = timeChess.seconds
         let timeInString = makeTime(time: timeInInt)
         self.view?.setTimeTopPlayer(timeTopPlayer: timeInString)
@@ -92,7 +97,6 @@ final class MainPresenter: MainViewPresenterProtocol {
     
     func getTimeBottomPlayer() {
 //       TODO: make the right logic
-//        guard let timeInInt = presets.first?.seconds else { return }
         let timeInInt = timeChess.seconds
         let timeInString = makeTime(time: timeInInt)
         self.view?.setTimeBottomPlayer(timeBottomPlayer: timeInString)
@@ -157,7 +161,7 @@ final class MainPresenter: MainViewPresenterProtocol {
     
 // MARK: - player Timer
     func tapTopPlayerLabel() {
-        timeChessTopPlayer += Float(presets.first?.increment ?? 0)
+        timeChessTopPlayer += timeIncrement
         IntToStringAndDisplayTopPlayer(timeChessTopPlayer: timeChessTopPlayer)
         timerBottomPlayer = Timer.scheduledTimer(timeInterval: 0.01,
                                                  target: self,
@@ -168,7 +172,7 @@ final class MainPresenter: MainViewPresenterProtocol {
         moveCounterTopPlayer()
     }
     func tapBottomPlayerLabel() {
-        timeChessBottomPlayer += Float(presets.first?.increment ?? 0)
+        timeChessBottomPlayer += timeIncrement
         IntToStringAndDisplayBottomPlayer(timeChessBottomPlayer: timeChessBottomPlayer)
         timerTopPlayer = Timer.scheduledTimer(timeInterval: 0.01,
                                               target: self,
@@ -200,8 +204,8 @@ final class MainPresenter: MainViewPresenterProtocol {
         timerBottomPlayer.invalidate()
     }
     func updateToStartTimeAndMove() {
-        timeChessTopPlayer = Float(presets.first?.seconds ?? 1)
-        timeChessBottomPlayer = Float(presets.first?.seconds ?? 10)
+        timeChessTopPlayer = Float(timeChess.seconds)
+        timeChessBottomPlayer = Float(timeChess.seconds)
         moveTopPlayer = 0
         moveBottomPlayer = 0
     }

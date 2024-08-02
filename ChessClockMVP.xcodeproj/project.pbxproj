@@ -14,7 +14,7 @@
 		6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96729338FE9006EA4FB /* MainViewController.swift */; };
 		6051C96D29338FEC006EA4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96C29338FEC006EA4FB /* Assets.xcassets */; };
 		6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */; };
-		6051C97E2937500F006EA4FB /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* Time.swift */; };
+		6051C97E2937500F006EA4FB /* TimeRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* TimeRealm.swift */; };
 		6051C98029378BC1006EA4FB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97F29378BC1006EA4FB /* MainPresenter.swift */; };
 		6051C98529388E79006EA4FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98429388E79006EA4FB /* SettingsViewController.swift */; };
 		6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98629388F5B006EA4FB /* SettingsPresenter.swift */; };
@@ -40,7 +40,7 @@
 		6051C96C29338FEC006EA4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6051C96F29338FEC006EA4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6051C97129338FEC006EA4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6051C97D2937500F006EA4FB /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		6051C97D2937500F006EA4FB /* TimeRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRealm.swift; sourceTree = "<group>"; };
 		6051C97F29378BC1006EA4FB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		6051C98429388E79006EA4FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6051C98629388F5B006EA4FB /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		6051C97929339696006EA4FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6051C97D2937500F006EA4FB /* Time.swift */,
+				6051C97D2937500F006EA4FB /* TimeRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					6051C95F29338FE9006EA4FB = {
 						CreatedOnToolsVersion = 14.1;
@@ -352,7 +352,7 @@
 				6051C9892938A225006EA4FB /* RouterMain.swift in Sources */,
 				6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */,
 				60180BCD2959D1D900D30877 /* NewTimePresenter.swift in Sources */,
-				6051C97E2937500F006EA4FB /* Time.swift in Sources */,
+				6051C97E2937500F006EA4FB /* TimeRealm.swift in Sources */,
 				6051C992293C70B7006EA4FB /* TimeTableViewCell.swift in Sources */,
 				6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */,
 				6051C96429338FE9006EA4FB /* AppDelegate.swift in Sources */,
@@ -414,6 +414,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -474,6 +475,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

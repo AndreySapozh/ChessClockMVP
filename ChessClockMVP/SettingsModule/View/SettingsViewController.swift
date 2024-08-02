@@ -29,7 +29,7 @@ final class SettingsViewController: UIViewController {
         configureTableView()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
         customTimeButton.addTarget(self, action: #selector(didTapCustomTimeButton), for: .touchUpInside)
-        
+//        self.tableView.isEditing = true
     }
     
     private func setupNavigationBar() {
@@ -56,6 +56,7 @@ final class SettingsViewController: UIViewController {
     
     @objc private func didTapStartButton() {
         guard let indexPath = tableView.indexPathForSelectedRow?.row else { return }
+        
         presenter.tapStartButton(time: presenter.time[indexPath])
     }
     
@@ -98,7 +99,7 @@ final class SettingsViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo:customTimeButton.bottomAnchor, constant: heightCell),
             tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presets.count) * heightCell))
+            tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presetsRealm.count) * heightCell))
         ])
     }
     
@@ -131,31 +132,52 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter.getTime()
         return presenter.time.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.textCell) as! TimeTableViewCell
-        let objectTimeChess = presenter.time[indexPath.row]
-        cell.set(object: objectTimeChess)
+        let timeChess = presenter.time[indexPath.row]
+        cell.set(object: timeChess)
         return cell
     }
-    
+        
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            (_, _, _) in
+//    MARK: change on presenter
+            presetsRealm.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.configureTableView()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+//   MARK move rows in tableView
+//     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//         return .none
+//    }
+//
+//     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
+//     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//         let movedObject = presetsRealm[sourceIndexPath.row]
+//         presetsRealm.remove(at: sourceIndexPath.row)
+//         presetsRealm.insert(movedObject, at: destinationIndexPath.row)
+//    }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexPath = indexPath.row
-        let time = presenter.time[indexPath]
-//        presenter.tapStartButton(time: time)
+//        let time = presenter.time[indexPath.row]
     }
 }
 
 extension SettingsViewController: SettingsViewProtocol {
-    func setTimeChess(timeChess: Time) {
+    func setTimeChess(timeChess: TimeRealm) {
         print(timeChess)
     }
-    
-    
 }

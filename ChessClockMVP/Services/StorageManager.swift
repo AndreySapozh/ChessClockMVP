@@ -13,9 +13,34 @@ class StorageManager {
     
     private init() {}
     
-    func save(timeChess: TimeExample) {
+    func save(chessTimeArray: [TimeRealm]) {
         write {
-            realm.add(timeChess)
+            realm.add(chessTimeArray)
+        }
+    }
+    
+    func save(chessTime: TimeRealm) {
+        write {
+            realm.add(chessTime)
+        }
+    }
+    
+    func delete(chessTimeArray: Results<TimeRealm>) {
+        write {
+            realm.delete(chessTimeArray)
+        }
+    }
+    
+    func delete(timeChess: TimeRealm) {
+        write {
+            realm.delete(timeChess)
+        }
+    }
+    
+    func edit(timeChess: TimeRealm, seconds: Int, increment: Int) {
+        write {
+            timeChess.seconds = seconds
+            timeChess.increment = increment
         }
     }
     

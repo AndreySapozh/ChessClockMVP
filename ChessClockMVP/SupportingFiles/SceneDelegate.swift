@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         let assemblyBuilder = AssemblyModelBuilder()
         let router = Router(navigationController: navigationController, assemblyBuilder: assemblyBuilder)
-        router.initialViewController(timeChess: presets.first!)
+//        router.initialViewController(timeChess: presets.first!)
+        router.initialViewController(timeChess: presetsRealm.first!)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         

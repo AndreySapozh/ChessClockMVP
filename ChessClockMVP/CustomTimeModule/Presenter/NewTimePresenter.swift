@@ -12,21 +12,21 @@ protocol NewTimeViewProtocol: AnyObject {
 }
 
 protocol NewTimeViewPresenterProtocol: AnyObject {
-    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: Time)
-    func tapSaveButton(newChessTime: Time)
+    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: TimeRealm)
+    func tapSaveButton(newChessTime: TimeRealm)
 }
 
 final class NewTimePresenter: NewTimeViewPresenterProtocol {
     weak var view: NewTimeViewProtocol?
-    var newTimeChess: Time
+    var newTimeChess: TimeRealm
     var router: RouterProtocol?
     
-    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: Time) {
+    init(view: NewTimeViewProtocol, router: RouterProtocol, newTimeChess: TimeRealm) {
         self.view = view
         self.newTimeChess = newTimeChess
         self.router = router
     }
-    func tapSaveButton(newChessTime: Time) {
+    func tapSaveButton(newChessTime: TimeRealm) {
 //        router?.popToRoot(time: newTimeChess)
     }
    

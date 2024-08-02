@@ -23,7 +23,7 @@ final class TimeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(object: Time) {
+    func set(object: TimeRealm) {
         self.timeTitleLabel.text = object.name
     }
     

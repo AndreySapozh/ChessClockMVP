@@ -8,25 +8,25 @@
 import Foundation
 	
 protocol SettingsViewProtocol: AnyObject {
-    func setTimeChess(timeChess: Time)
+    func setTimeChess(timeChess: TimeRealm)
 }
 
 protocol SettingsViewPresenterProtocol: AnyObject {
-    init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: Time, time: [Time])
+    init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeRealm, time: [TimeRealm])
     func getTime()
-    var time: [Time] { get set}
+    var time: [TimeRealm] { get set}
     func setTime()
-    func tapStartButton(time: Time)
+    func tapStartButton(time: TimeRealm)
     func tapCreateNewTime()
 }
 
 final class SettingsPresenter: SettingsViewPresenterProtocol {
     weak var view: SettingsViewProtocol?
     var router: RouterProtocol?
-    var timeChess: Time
-    var time: [Time]
+    var timeChess: TimeRealm
+    var time: [TimeRealm]
     
-    required init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: Time, time: [Time]) {
+    required init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeRealm, time: [TimeRealm]) {
         self.view = view
         self.timeChess = timeChess
         self.router = router
@@ -36,11 +36,11 @@ final class SettingsPresenter: SettingsViewPresenterProtocol {
     public func setTime() {
         self.view?.setTimeChess(timeChess: timeChess)
     }
-    func tapStartButton(time: Time) {
+    func tapStartButton(time: TimeRealm) {
         router?.backToMainView(timeChess: time)
     }
     func getTime() {
-        time = presets
+        time = presetsRealm
     }
     func tapCreateNewTime() {
         router?.showCreateNewTime(timeChess: timeChess)
