@@ -15,6 +15,7 @@ final class SettingsViewController: UIViewController {
     private var tableView = UITableView()
     
     private let heightCell: CGFloat = 50
+    private var switchMoveCell: Bool = true
         
     struct Cells {
         static let textCell = "textCell"
@@ -49,9 +50,13 @@ final class SettingsViewController: UIViewController {
     }
     
     @objc private func moveDeleteRows() {
-        // to correct on move and delete rows
-//        presenter.tapStartButton()
-//        presenter.tapStartButton(time: presets.first!)
+        if switchMoveCell == true {
+            self.tableView.isEditing = switchMoveCell
+            switchMoveCell.toggle()
+        } else {
+            self.tableView.isEditing = switchMoveCell
+            switchMoveCell.toggle()
+        }
     }
     
     @objc private func didTapStartButton() {
@@ -99,8 +104,16 @@ final class SettingsViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo:customTimeButton.bottomAnchor, constant: heightCell),
             tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presetsRealm.count) * heightCell))
+//            tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presenter.time.count) * heightCell))
         ])
+//     TODO: complete the right logic
+        if presenter.time.count > 9 {
+            NSLayoutConstraint.activate([
+                tableView.heightAnchor.constraint(equalToConstant: (CGFloat(9) * heightCell))])
+        } else {
+            NSLayoutConstraint.activate([
+                tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presenter.time.count) * heightCell))])
+        }
     }
     
     private func configureStartButton() {
@@ -132,7 +145,7 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.getTime()
+        //        presenter.getTime()
         return presenter.time.count
     }
     
@@ -142,33 +155,32 @@ extension SettingsViewController: UITableViewDataSource {
         cell.set(object: timeChess)
         return cell
     }
-        
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (_, _, _) in
-//    MARK: change on presenter
-            presetsRealm.remove(at: indexPath.row)
+            //    MARK: change on presenter
+            let time = StorageManager.shared.realm.objects(TimeRealm.self)
+            self.presenter.deleteTimeChessInStorageManager(time: time[indexPath.row])
+            //            StorageManager.shared.delete(timeChess: time[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .automatic)
             self.configureTableView()
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-//   MARK move rows in tableView
-//     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//         return .none
-//    }
-//
-//     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
-//     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//         let movedObject = presetsRealm[sourceIndexPath.row]
-//         presetsRealm.remove(at: sourceIndexPath.row)
-//         presetsRealm.insert(movedObject, at: destinationIndexPath.row)
-//    }
+    //   MARK move rows in tableView
+    //     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    //         return .none
+    //    }
+    //
+    //     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+    //        return false
+    //    }
+    //    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    //    }
+    //}
 }
-
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

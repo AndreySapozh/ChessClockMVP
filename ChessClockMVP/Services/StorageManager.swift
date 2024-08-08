@@ -37,13 +37,6 @@ class StorageManager {
         }
     }
     
-    func edit(timeChess: TimeRealm, seconds: Int, increment: Int) {
-        write {
-            timeChess.seconds = seconds
-            timeChess.increment = increment
-        }
-    }
-    
     private func write(_ completion: () -> Void) {
         do {
             try realm.write {

@@ -34,7 +34,6 @@ protocol MainViewPresenterProtocol: AnyObject {
     func theEndTimeBottomPlayer()
     func moveCounterBottomPlayer()
     func moveCounterTopPlayer()
-    func saveDefaultTimeControls()
     
 }
 
@@ -64,11 +63,6 @@ final class MainPresenter: MainViewPresenterProtocol {
         self.timeChessBottomPlayer = Float(timeChess.seconds)
         self.timeIncrement = Float(timeChess.increment)
     }
-// MARK: - add default time in storage manager
-    func saveDefaultTimeControls() {
-        StorageManager.shared.save(chessTimeArray: presetsRealm)
-    }
-    
     
 // MARK: - tap buttons
     func tapSettingsButton() {

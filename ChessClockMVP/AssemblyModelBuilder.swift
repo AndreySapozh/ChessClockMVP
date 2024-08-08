@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol, timeChess: TimeRealm) -> UIViewController
@@ -24,7 +25,7 @@ final class AssemblyModelBuilder: AssemblyBuilderProtocol {
 
     func createSettingsModule(router: RouterProtocol, timeChess: TimeRealm) -> UIViewController {
         let view = SettingsViewController()
-        let time = presetsRealm
+        let time = StorageManager.shared.realm.objects(TimeRealm.self)
         let presenter = SettingsPresenter(view: view, router: router, timeChess: timeChess, time: time)
         view.presenter = presenter
         return view

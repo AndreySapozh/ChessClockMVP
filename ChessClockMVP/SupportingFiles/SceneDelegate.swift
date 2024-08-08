@@ -21,16 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         let assemblyBuilder = AssemblyModelBuilder()
         let router = Router(navigationController: navigationController, assemblyBuilder: assemblyBuilder)
-//        router.initialViewController(timeChess: presets.first!)
-        router.initialViewController(timeChess: presetsRealm.first!)
+        StorageManager.shared.save(chessTimeArray: presetsRealm)
+        let time = StorageManager.shared.realm.objects(TimeRealm.self)
+        router.initialViewController(timeChess: time.first!)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
-        
-            
-//        window = UIWindow(windowScene: windowScene)
-//        window?.rootViewController = MainViewController()
-//        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

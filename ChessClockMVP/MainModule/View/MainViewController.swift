@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import RealmSwift
 
 class MainViewController: UIViewController {
     
     var presenter: MainViewPresenterProtocol!
-    var chessTimeRealm: Results<TimeRealm>!
     
     private let topPlayerLabel = UILabel()
     private let bottomPlayerLabel = UILabel()
@@ -44,15 +42,8 @@ class MainViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
         pauseButton.addTarget(self, action: #selector(didTapPauseButton), for: .touchUpInside)
-//        presenter.saveDefaultTimeControls()
-//        chessTimeRealm = StorageManager.shared.realm.objects(TimeRealm.self)
-//        chessTimeRealm = StorageManager.shared.realm.objects(TimeRealm.self)
     }
     
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        StorageManager.shared.delete(chessTimeArray: StorageManager.shared.realm.objects(TimeRealm.self))
-//    }
 //    MARK: - NavigationController
     private func setupNavigationController() {
         navigationController?.navigationBar.tintColor = .black
@@ -88,7 +79,6 @@ class MainViewController: UIViewController {
         presenter.tapPauseButton()
         topPlayerLabel.backgroundColor = UIColor.lightGrayLabel
         bottomPlayerLabel.backgroundColor = UIColor.lightGrayLabel
-//StorageManager.shared.delete(timeChess: chessTimeRealm.first!)
     }
     
     @objc private func didTapResetButton() {
