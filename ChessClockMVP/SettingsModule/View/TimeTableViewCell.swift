@@ -9,7 +9,7 @@ import UIKit
 
 
 final class TimeTableViewCell: UITableViewCell {
-
+    
     var timeTitleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -23,9 +23,10 @@ final class TimeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(object: TimeChess) {
-        self.timeTitleLabel.text = object.timeChess
+    func set(object: TimeRealm) {
+        self.timeTitleLabel.text = object.name
     }
+    
     
     func configureTitleLabel()  {
         timeTitleLabel.numberOfLines = 0
@@ -35,11 +36,11 @@ final class TimeTableViewCell: UITableViewCell {
     func setTimeTitleLabelConstraints() {
         timeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-                timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-                timeTitleLabel.heightAnchor.constraint(equalToConstant: 80),
-                timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-                                    ])
+            timeTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            timeTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            timeTitleLabel.heightAnchor.constraint(equalToConstant: 80),
+            timeTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
     
 }

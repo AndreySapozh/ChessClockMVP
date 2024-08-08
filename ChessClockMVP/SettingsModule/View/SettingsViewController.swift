@@ -8,55 +8,116 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-
+    
     var presenter: SettingsViewPresenterProtocol!
+    private let customTimeButton = UIButton()
     private let startButton = UIButton()
     private var tableView = UITableView()
     
     private let heightCell: CGFloat = 50
-    
-    var chessTimeOptions: [TimeChess] = [TimeChess(timeChess: "Create custom time"), TimeChess(timeChess: "Fischer Blitz 5|0"), TimeChess(timeChess: "Fischer 5|5") , TimeChess(timeChess: "Tournament 40/2hr, 1hr")]
-    
+    private var switchMoveCell: Bool = true
+        
     struct Cells {
         static let textCell = "textCell"
-    }		
-
-
+    }
+    
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.whiteView
-        configureTableView()
+        setupNavigationBar()
+        configureCustomTimeButton()
         configureStartButton()
+        configureTableView()
         startButton.addTarget(self, action: #selector(didTapStartButton), for: .touchUpInside)
-
+        customTimeButton.addTarget(self, action: #selector(didTapCustomTimeButton), for: .touchUpInside)
+//        self.tableView.isEditing = true
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.title = "Time Controls"
+        let backItem = UIBarButtonItem()
+        backItem.title = "Cancel"
+        navigationItem.backBarButtonItem = backItem
+        moveDeleteRowsRightBarButton()
+    }
+    
+    private func moveDeleteRowsRightBarButton() {
+        let rightBarButton = UIBarButtonItem(title: "Done",
+                                             style: UIBarButtonItem.Style.plain,
+                                             target: self,
+                                             action: #selector(moveDeleteRows))
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc private func moveDeleteRows() {
+        if switchMoveCell == true {
+            self.tableView.isEditing = switchMoveCell
+            switchMoveCell.toggle()
+        } else {
+            self.tableView.isEditing = switchMoveCell
+            switchMoveCell.toggle()
+        }
     }
     
     @objc private func didTapStartButton() {
-        presenter.tapStartButton()
+        guard let indexPath = tableView.indexPathForSelectedRow?.row else { return }
+        
+        presenter.tapStartButton(time: presenter.time[indexPath])
     }
     
+    @objc private func didTapCustomTimeButton() {
+        presenter.tapCreateNewTime()
+    }
+    
+    private func configureCustomTimeButton() {
+        view.addSubview(customTimeButton)
+        customTimeButton.backgroundColor = UIColor.white
+        customTimeButton.setTitle("Add custom time", for: .normal)
+        customTimeButton.setTitleColor(.black, for: .normal)
+        customTimeButton.translatesAutoresizingMaskIntoConstraints = false
+        createCustomTimeButtonConstraint()
+    }
+    
+    private func createCustomTimeButtonConstraint() {
+        customTimeButton.layer.cornerRadius = 8
+        
+        NSLayoutConstraint.activate([
+            customTimeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: heightCell),
+            customTimeButton.heightAnchor.constraint(equalToConstant: heightCell),
+            customTimeButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            customTimeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+        ])
+    }
     
     private func configureTableView() {
         view.addSubview(tableView)
-//        set delegates
+        //        set delegates
         setTableViewDelegates()
-//        set row height
+        //        set row height
         tableView.rowHeight = heightCell
-//        register cells
+        //        register cells
         tableView.register(TimeTableViewCell.self, forCellReuseIdentifier: Cells.textCell)
-//        set constraints
+        tableView.layer.cornerRadius = 8
+        //        set constraints
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                tableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
-                tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(2 * heightCell))
-                                    ])
+            tableView.topAnchor.constraint(equalTo:customTimeButton.bottomAnchor, constant: heightCell),
+            tableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+//            tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presenter.time.count) * heightCell))
+        ])
+//     TODO: complete the right logic
+        if presenter.time.count > 9 {
+            NSLayoutConstraint.activate([
+                tableView.heightAnchor.constraint(equalToConstant: (CGFloat(9) * heightCell))])
+        } else {
+            NSLayoutConstraint.activate([
+                tableView.heightAnchor.constraint(equalToConstant: (CGFloat(presenter.time.count) * heightCell))])
         }
+    }
     
     private func configureStartButton() {
         view.addSubview(startButton)
-        
-//        startButton.backgroundColor = UIColor(red: 10/255, green: 100/255, blue: 200/255, alpha: 1)
         startButton.backgroundColor = UIColor.blueButton
         startButton.setTitle("START", for: .normal)
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -65,51 +126,70 @@ final class SettingsViewController: UIViewController {
     }
     
     private func createStartButtonConstraint() {
-        startButton.layer.cornerRadius = 3
+        startButton.layer.cornerRadius = 8
         
         NSLayoutConstraint.activate([
-                startButton.heightAnchor.constraint(equalToConstant: heightCell),
-                startButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-                startButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-                startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -heightCell)
-                                    ])
+            startButton.heightAnchor.constraint(equalToConstant: heightCell),
+            startButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            startButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -heightCell)
+        ])
         
     }
     private func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
- 
 }
 
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chessTimeOptions.count
+        //        presenter.getTime()
+        return presenter.time.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.textCell) as! TimeTableViewCell
-        let object = chessTimeOptions[indexPath.row]
-        cell.set(object: object)
+        let timeChess = presenter.time[indexPath.row]
+        cell.set(object: timeChess)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            presenter.tapCreateNewTime()
-        }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        else { return }
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            (_, _, _) in
+            //    MARK: change on presenter
+            let time = StorageManager.shared.realm.objects(TimeRealm.self)
+            self.presenter.deleteTimeChessInStorageManager(time: time[indexPath.row])
+            //            StorageManager.shared.delete(timeChess: time[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.configureTableView()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-
+    //   MARK move rows in tableView
+    //     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    //         return .none
+    //    }
+    //
+    //     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+    //        return false
+    //    }
+    //    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    //    }
+    //}
+}
+extension SettingsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let time = presenter.time[indexPath.row]
+    }
 }
 
 extension SettingsViewController: SettingsViewProtocol {
-    func setTimeChess(timeChess: TimeChess ) {
+    func setTimeChess(timeChess: TimeRealm) {
         print(timeChess)
     }
-    
-
 }

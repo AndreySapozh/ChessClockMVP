@@ -9,28 +9,30 @@
 /* Begin PBXBuildFile section */
 		60180BCA2959D19200D30877 /* NewTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60180BC92959D19200D30877 /* NewTimeViewController.swift */; };
 		60180BCD2959D1D900D30877 /* NewTimePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60180BCC2959D1D900D30877 /* NewTimePresenter.swift */; };
-		60180BCF2959D4DC00D30877 /* NewTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60180BCE2959D4DC00D30877 /* NewTimeModel.swift */; };
 		6051C96429338FE9006EA4FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96329338FE9006EA4FB /* AppDelegate.swift */; };
 		6051C96629338FE9006EA4FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96529338FE9006EA4FB /* SceneDelegate.swift */; };
 		6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C96729338FE9006EA4FB /* MainViewController.swift */; };
 		6051C96D29338FEC006EA4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96C29338FEC006EA4FB /* Assets.xcassets */; };
 		6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */; };
-		6051C97E2937500F006EA4FB /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* Time.swift */; };
+		6051C97E2937500F006EA4FB /* TimeRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97D2937500F006EA4FB /* TimeRealm.swift */; };
 		6051C98029378BC1006EA4FB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C97F29378BC1006EA4FB /* MainPresenter.swift */; };
 		6051C98529388E79006EA4FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98429388E79006EA4FB /* SettingsViewController.swift */; };
 		6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98629388F5B006EA4FB /* SettingsPresenter.swift */; };
 		6051C9892938A225006EA4FB /* RouterMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C9882938A225006EA4FB /* RouterMain.swift */; };
 		6051C98B2938A424006EA4FB /* AssemblyModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */; };
-		6051C990293C7059006EA4FB /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C98F293C7059006EA4FB /* SettingsModel.swift */; };
 		6051C992293C70B7006EA4FB /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051C991293C70B7006EA4FB /* TimeTableViewCell.swift */; };
+		607F63752C24B7E9002B3A8E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 607F63742C24B7E9002B3A8E /* Podfile */; };
+		60BDE1A32C2B1E3700B6B496 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BDE1A22C2B1E3700B6B496 /* StorageManager.swift */; };
 		60C1126F2A5ABDB3005E06B1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C1126E2A5ABDB3005E06B1 /* Colors.swift */; };
 		60C112712A5AC8DA005E06B1 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C112702A5AC8DA005E06B1 /* Fonts.swift */; };
+		66F631F2246A8180BEF08B10 /* Pods_ChessClockMVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D046D41682B69C1DC054C04 /* Pods_ChessClockMVP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D046D41682B69C1DC054C04 /* Pods_ChessClockMVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChessClockMVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1680CDA8130DA8920F322167 /* Pods-ChessClockMVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClockMVP.release.xcconfig"; path = "Target Support Files/Pods-ChessClockMVP/Pods-ChessClockMVP.release.xcconfig"; sourceTree = "<group>"; };
 		60180BC92959D19200D30877 /* NewTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeViewController.swift; sourceTree = "<group>"; };
 		60180BCC2959D1D900D30877 /* NewTimePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimePresenter.swift; sourceTree = "<group>"; };
-		60180BCE2959D4DC00D30877 /* NewTimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeModel.swift; sourceTree = "<group>"; };
 		6051C96029338FE9006EA4FB /* ChessClockMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClockMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6051C96329338FE9006EA4FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6051C96529338FE9006EA4FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,16 +40,18 @@
 		6051C96C29338FEC006EA4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6051C96F29338FEC006EA4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6051C97129338FEC006EA4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6051C97D2937500F006EA4FB /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		6051C97D2937500F006EA4FB /* TimeRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRealm.swift; sourceTree = "<group>"; };
 		6051C97F29378BC1006EA4FB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		6051C98429388E79006EA4FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6051C98629388F5B006EA4FB /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		6051C9882938A225006EA4FB /* RouterMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMain.swift; sourceTree = "<group>"; };
 		6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModelBuilder.swift; sourceTree = "<group>"; };
-		6051C98F293C7059006EA4FB /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		6051C991293C70B7006EA4FB /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
+		607F63742C24B7E9002B3A8E /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		60BDE1A22C2B1E3700B6B496 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		60C1126E2A5ABDB3005E06B1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		60C112702A5AC8DA005E06B1 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		8AABFBAB15909C51E1027406 /* Pods-ChessClockMVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClockMVP.debug.xcconfig"; path = "Target Support Files/Pods-ChessClockMVP/Pods-ChessClockMVP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,20 +59,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66F631F2246A8180BEF08B10 /* Pods_ChessClockMVP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		60180BC72959D14700D30877 /* NewTimeModule */ = {
+		29DCE5F284E2EC2D4B4687EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AABFBAB15909C51E1027406 /* Pods-ChessClockMVP.debug.xcconfig */,
+				1680CDA8130DA8920F322167 /* Pods-ChessClockMVP.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3A54E2E8B0843663C35D77C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D046D41682B69C1DC054C04 /* Pods_ChessClockMVP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60180BC72959D14700D30877 /* CustomTimeModule */ = {
 			isa = PBXGroup;
 			children = (
 				60180BCB2959D1B100D30877 /* Presenter */,
 				60180BC82959D16F00D30877 /* View */,
-				60180BD02959D50300D30877 /* Model */,
 			);
-			path = NewTimeModule;
+			path = CustomTimeModule;
 			sourceTree = "<group>";
 		};
 		60180BC82959D16F00D30877 /* View */ = {
@@ -87,19 +108,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		60180BD02959D50300D30877 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				60180BCE2959D4DC00D30877 /* NewTimeModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6051C95729338FE9006EA4FB = {
 			isa = PBXGroup;
 			children = (
+				607F63742C24B7E9002B3A8E /* Podfile */,
 				6051C96229338FE9006EA4FB /* ChessClockMVP */,
 				6051C96129338FE9006EA4FB /* Products */,
+				29DCE5F284E2EC2D4B4687EF /* Pods */,
+				3A54E2E8B0843663C35D77C0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,9 +132,10 @@
 			children = (
 				6051C98A2938A424006EA4FB /* AssemblyModelBuilder.swift */,
 				6051C9882938A225006EA4FB /* RouterMain.swift */,
-				60180BC72959D14700D30877 /* NewTimeModule */,
+				60180BC72959D14700D30877 /* CustomTimeModule */,
 				6051C9812938827F006EA4FB /* SettingsModule */,
 				6051C97729339674006EA4FB /* MainModule */,
+				60EB1D652B4847F8001B7C3E /* Services */,
 				6051C97B293396FB006EA4FB /* SupportingFiles */,
 				6051C97C29339740006EA4FB /* Resources */,
 				6051C96E29338FEC006EA4FB /* LaunchScreen.storyboard */,
@@ -147,7 +164,7 @@
 		6051C97929339696006EA4FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6051C97D2937500F006EA4FB /* Time.swift */,
+				6051C97D2937500F006EA4FB /* TimeRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,7 +200,6 @@
 		6051C9812938827F006EA4FB /* SettingsModule */ = {
 			isa = PBXGroup;
 			children = (
-				6051C98E293C7036006EA4FB /* Model */,
 				6051C9832938832B006EA4FB /* View */,
 				6051C9822938829B006EA4FB /* Presenter */,
 			);
@@ -207,12 +223,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6051C98E293C7036006EA4FB /* Model */ = {
+		60EB1D652B4847F8001B7C3E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6051C98F293C7059006EA4FB /* SettingsModel.swift */,
+				60BDE1A22C2B1E3700B6B496 /* StorageManager.swift */,
 			);
-			path = Model;
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6051C97429338FEC006EA4FB /* Build configuration list for PBXNativeTarget "ChessClockMVP" */;
 			buildPhases = (
+				1395CCDCBBB24D95D661CD78 /* [CP] Check Pods Manifest.lock */,
 				6051C95C29338FE9006EA4FB /* Sources */,
 				6051C95D29338FE9006EA4FB /* Frameworks */,
 				6051C95E29338FE9006EA4FB /* Resources */,
+				28E1975941DC4E7DD3FDD9DE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,7 +261,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					6051C95F29338FE9006EA4FB = {
 						CreatedOnToolsVersion = 14.1;
@@ -273,12 +291,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				607F63752C24B7E9002B3A8E /* Podfile in Resources */,
 				6051C97029338FEC006EA4FB /* LaunchScreen.storyboard in Resources */,
 				6051C96D29338FEC006EA4FB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1395CCDCBBB24D95D661CD78 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChessClockMVP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28E1975941DC4E7DD3FDD9DE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChessClockMVP/Pods-ChessClockMVP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChessClockMVP/Pods-ChessClockMVP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChessClockMVP/Pods-ChessClockMVP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6051C95C29338FE9006EA4FB /* Sources */ = {
@@ -291,16 +352,15 @@
 				6051C9892938A225006EA4FB /* RouterMain.swift in Sources */,
 				6051C98729388F5B006EA4FB /* SettingsPresenter.swift in Sources */,
 				60180BCD2959D1D900D30877 /* NewTimePresenter.swift in Sources */,
-				6051C97E2937500F006EA4FB /* Time.swift in Sources */,
+				6051C97E2937500F006EA4FB /* TimeRealm.swift in Sources */,
 				6051C992293C70B7006EA4FB /* TimeTableViewCell.swift in Sources */,
-				60180BCF2959D4DC00D30877 /* NewTimeModel.swift in Sources */,
 				6051C96829338FE9006EA4FB /* MainViewController.swift in Sources */,
 				6051C96429338FE9006EA4FB /* AppDelegate.swift in Sources */,
-				6051C990293C7059006EA4FB /* SettingsModel.swift in Sources */,
 				6051C98B2938A424006EA4FB /* AssemblyModelBuilder.swift in Sources */,
 				6051C96629338FE9006EA4FB /* SceneDelegate.swift in Sources */,
 				6051C98529388E79006EA4FB /* SettingsViewController.swift in Sources */,
 				60180BCA2959D19200D30877 /* NewTimeViewController.swift in Sources */,
+				60BDE1A32C2B1E3700B6B496 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +414,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -414,6 +475,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -434,6 +496,7 @@
 		};
 		6051C97529338FEC006EA4FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AABFBAB15909C51E1027406 /* Pods-ChessClockMVP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,6 +525,7 @@
 		};
 		6051C97629338FEC006EA4FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1680CDA8130DA8920F322167 /* Pods-ChessClockMVP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -13,14 +13,14 @@ protocol RouterMain {
 }
 
 protocol RouterProtocol: RouterMain {
-    func initialViewController()
-    func showSettings()
-    func popToRoot()
-    func showCreateNewTime()
+    func initialViewController(timeChess: TimeRealm)
+    func showSettings(timeChess: TimeRealm)
+    func showCreateNewTime(timeChess: TimeRealm)
+    func backToSettings(timeChess: TimeRealm)
+    func backToMainView(timeChess: TimeRealm)
 }
 
 final class Router: RouterProtocol {
-    
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
     
@@ -29,34 +29,39 @@ final class Router: RouterProtocol {
         self.assemblyBuilder = assemblyBuilder
     }
    
-    
-    func initialViewController() {
+    func initialViewController(timeChess: TimeRealm) {
         if let navigationController = navigationController {
-            guard let mainViewController = assemblyBuilder?.createMainModule(router: self) else { return }
+            guard let mainViewController = assemblyBuilder?.createMainModule(router: self, timeChess: timeChess) else { return }
             navigationController.viewControllers = [mainViewController]
         }
     }
     
-    func showSettings() {
+    func showSettings(timeChess: TimeRealm) {
         if let navigationController = navigationController {
-            guard let settingsViewController = assemblyBuilder?.createSettingsModule(router: self) else { return }
+            guard let settingsViewController = assemblyBuilder?.createSettingsModule(router: self, timeChess: timeChess) else { return }
             navigationController.pushViewController(settingsViewController, animated: true)
         }
-        
     }
     
-    func showCreateNewTime() {
+    func showCreateNewTime(timeChess: TimeRealm) {
         if let navigationController = navigationController {
-            guard let newTimeViewController = assemblyBuilder?.createNewTimeModule(router: self) else { return }
+            guard let newTimeViewController = assemblyBuilder?.createNewTimeModule(router: self, newTimeChess: timeChess) else { return }
             navigationController.pushViewController(newTimeViewController, animated: true)
-            
         }
     }
     
-    func popToRoot() {
+    func backToSettings(timeChess: TimeRealm) {
         if let navigationController = navigationController {
-            navigationController.popToRootViewController(animated: true)
+            guard let settingsViewController = assemblyBuilder?.createSettingsModule(router: self, timeChess: timeChess) else { return }
+            navigationController.popToViewController(settingsViewController, animated: true)
+        }
+    }
+    func backToMainView(timeChess: TimeRealm) {
+        if let navigationController = navigationController {
+            guard let mainViewController = assemblyBuilder?.createMainModule(router: self, timeChess: timeChess) else { return }
+            navigationController.setViewControllers([mainViewController], animated: true)
         }
     }
 }
+
 

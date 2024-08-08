@@ -6,42 +6,49 @@
 //
 
 import Foundation
+import RealmSwift
 	
 protocol SettingsViewProtocol: AnyObject {
-    func setTimeChess(timeChess: TimeChess)
+    func setTimeChess(timeChess: TimeRealm)
 }
 
 protocol SettingsViewPresenterProtocol: AnyObject {
-    init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeChess)
+    init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeRealm, time: Results<TimeRealm>!)
+    func getTime()
+    var time: Results<TimeRealm>! { get set}
     func setTime()
-    func tapStartButton()
+    func tapStartButton(time: TimeRealm)
     func tapCreateNewTime()
+    func deleteTimeChessInStorageManager(time: TimeRealm)
 }
 
 final class SettingsPresenter: SettingsViewPresenterProtocol {
-    
     weak var view: SettingsViewProtocol?
-//    var networkService: NetworkService!
     var router: RouterProtocol?
-    var timeChess: TimeChess
+    var timeChess: TimeRealm
+    var time: Results<TimeRealm>!
     
-    required init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeChess) {
+    required init(view: SettingsViewProtocol, router: RouterProtocol, timeChess: TimeRealm, time: Results<TimeRealm>!) {
         self.view = view
-//        self.networkService = networkService
         self.timeChess = timeChess
         self.router = router
+        self.time = time
     }
     
     public func setTime() {
         self.view?.setTimeChess(timeChess: timeChess)
     }
-    func tapStartButton() {
-        router?.popToRoot()
-
+    func tapStartButton(time: TimeRealm) {
+        router?.backToMainView(timeChess: time)
     }
-    
+    func getTime() {
+        time = StorageManager.shared.realm.objects(TimeRealm.self)
+    }
     func tapCreateNewTime() {
-        router?.showCreateNewTime()
+        router?.showCreateNewTime(timeChess: timeChess)
+    }
+    func deleteTimeChessInStorageManager(time: TimeRealm) {
+        StorageManager.shared.delete(timeChess: time)
     }
 
 }
